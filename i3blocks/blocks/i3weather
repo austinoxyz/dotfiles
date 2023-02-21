@@ -1,0 +1,37 @@
+#!/usr/bin/bash
+
+# we dont want the weather if vpn is connected
+vpn_status="$(echo "$(mullvad status)" | awk '{print $1}')"
+if [ "$vpn_status" = "Connected" ]; then
+    echo "<span foreground='$key_color' background='$left_key_color' size='x-large'></span>\
+<span background='$key_color'>\
+<span foreground='#F70400' size='small' rise='10'> 🗙</span>\
+</span>"
+    exit 0
+fi
+
+echo "$(curl -Ss "https://wttr.in?0&T&Q")" > ~/.config/i3blocks/blocks/.weather
+weather_symbol="$(python3 ~/.config/i3blocks/blocks/weather_symbol.py "$(cat ~/.config/i3blocks/blocks/.weather | head -n 1 | cut -c 17-)")"
+temp=$(cat ~/.config/i3blocks/blocks/.weather | head -n 2 | tail -n 1 | cut -c 17- | awk '{print $1}')
+
+# if high and low is shown, show average.
+if [[ "$temp" =~ "(" ]]; then
+    high=$(echo $temp | awk -F "(" '{print $1}')
+    low=$(echo $temp | awk -F "(" '{print $2}')
+    low=${low::-1}
+    temp="$(python3 -c "print(int((int(str(\"$high\"))+int(str(\"$low\")))/2))")"
+else
+    temp="$(echo $temp | awk '{print $1}')"
+fi
+
+if [ "$temp" -lt 50 ]; then
+    text_color=\#2ed5dd
+elif [ "$temp" -lt 75 ]; then
+    text_color=\#25CE00
+else
+    text_color=\#F70400
+fi
+
+echo "$weather_symbol $temp°F"
+echo "$temp°F"
+echo $text_color

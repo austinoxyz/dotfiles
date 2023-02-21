@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+temporary="$(df -h | grep '/dev/sda1')"
+usage="$(echo $temporary | awk '{print $5}' | sed 's/.$//')"
+display="$(echo $temporary | awk '{print $3 "/" $2}')"
+
+if [ "$usage" -lt 15 ]; then
+    text_color=\#FFFFFF
+elif [ "$usage" -lt 30 ]; then
+    text_color=\#F7E413
+elif [ "$usage" -lt 70 ]; then
+    text_color=\#F74600
+else
+    text_color=\#F70400
+fi
+
+echo "💾 $display ($usage%)"
+echo "$usage%"
+echo $text_color

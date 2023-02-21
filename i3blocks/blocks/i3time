@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+time_str="🕓 $(date "+%I:%M%p")"
+echo "$time_str"
+echo "$time_str"
+echo \#ffffff
