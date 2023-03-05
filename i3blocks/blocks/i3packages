@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-n_packs="$(apt-get --just-print upgrade |grep -c ^Inst)"
+n_packs="$(apt-get --just-print upgrade | grep -c ^Inst)"
 echo "📦$n_packs"
 echo "📦$n_packs"
 echo \#ffffff

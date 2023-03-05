@@ -38,7 +38,6 @@ set splitbelow
 set splitright
 
 
-
 """ PLUGINS 
 " using vim-plug
 call plug#begin()
@@ -64,32 +63,45 @@ call plug#end()
 
 
 
-""" PRETTY
-" gruvbox color scheme
-colorscheme gruvbox
-" transparent background (haven't tested it for terminal emulators other than
-" that which I use, terminator)
+""" APPERANCE
+
+set noshowmode
+
+" transparent background (haven't tested it for terminal emulators other than terminator)
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
 
-"" vim-airline symbols
-set noshowmode
+colorscheme gruvbox
+
+"" vim-airline stuff
+"
 let g:airline_theme='cool'
 let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+let g:bullets_enabled_file_types = ['markdown', 'text']
+
+" tabline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 
-
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 """ CONFIGS
 let mapleader = " "
-
-lua << EOF
-vim.g.maplocalleader = "\\"
-EOF
 
 " toggle line wrapping
 nmap <M-=> :set wrap<CR>
@@ -100,6 +112,28 @@ nmap <c-c> <esc>
 imap <c-c> <esc>
 vmap <c-c> <esc>
 omap <c-c> <esc>
+
+" navigate tabs
+nmap <M-p> :+tabn<CR>
+nmap <M-o> :-tabn<CR>
+
+" navigate buffers
+nmap <M-0> :+b<CR>
+nmap <M-9> :-b<CR>
+
+" navigate ctags
+nmap <M-]> <c-]>
+nmap <M-[> <c-t>
+
+" open and close tabs
+nmap <M-i> :tabnew 
+nmap <M-y> :tabclose<CR>
+
+" move curosr between windows alt Alt+[vimkey]
+nnoremap <M-h> <c-w>h
+nnoremap <M-l> <c-w>l
+nnoremap <M-k> <c-w>k
+nnoremap <M-j> <c-w>j
 
 " move cursor between windows with arrow keys
 nnoremap <Left> <c-w>h
@@ -129,20 +163,37 @@ nnoremap <leader>2e :e   Makefile<CR>
 nnoremap <leader>2v :vsp Makefile<CR>
 nnoremap <leader>2h :sp  Makefile<CR>
 
+" generate ctags file for cpp projects
+nnoremap <leader>= :!ctags src/*.cpp include/*.hpp main.cpp<CR>
 
 "" junegunn/fzf 
-" mappings
+
 nnoremap <leader>h :FZF<CR>
 nnoremap <leader>f :Files<CR>
+nnoremap <leader>t :Tags<CR>
+
 " window layout
+
 let g:fzf_layout = { 'window': { 'width': 0.85, 'height': 0.85 } }
+
 " scroll through :Files preview
 let $FZF_DEFAULT_OPTS="--bind \"ctrl-n:preview-down,ctrl-h:preview-up\""
 " ignore .git, .vimspector.json files
 let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.git,.vimspector.json}/*"'
+
 command! -bang -nargs=? -complete=dir Files
      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--disabled', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  let spec = fzf#vim#with_preview(spec, 'right', 'ctrl-/')
+  call fzf#vim#grep(initial_command, 1, spec, a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 "" scrooloose/nerdtree
 " mappings
@@ -185,6 +236,9 @@ augroup END
 """ COC.VIM
 """
 
+" Disable startup warning since nvim is up to date.
+let g:coc_disable_startup_warning = 1
+
 " allow comments in json files
 auto FileType json syntax match Comment +\/\/.\+$+
 set signcolumn=yes
@@ -204,6 +258,7 @@ inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
+
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Use <c-space> to trigger completion

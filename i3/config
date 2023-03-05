@@ -43,7 +43,7 @@ bindsym $mod+Return exec $TERMINAL
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -i -l "launch_bins.txt" -m 2 -p "launch:"
+bindsym $mod+d exec --no-startup-id dmenu_run -i -l "launch_bins.txt" -m 1 -p "launch:"
 
 # applications
 bindsym $mod+6 exec --no-startup-id terminator -e '/usr/bin/nvim'

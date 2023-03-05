@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+status="$(echo "$(mullvad status)" | awk '{print $1}')"
+
+# green if connected, red otherwise
+if [ "$status" = "Connected" ]; then
+    text_color=\#25CE00
+else
+    text_color=\#F70400
+fi
+    
+#################################
+
+echo "<span foreground='$key_color' background='$left_key_color' size='x-large'></span>\
+<span background='$key_color'>\
+<span foreground='$text_color' size='small' rise='10'> VPN </span>\
+</span>"
