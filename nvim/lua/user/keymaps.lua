@@ -102,3 +102,6 @@ keymap("n", "<S-j>", ":call vimspector#StepOver()<CR>", opts)
 keymap("n", "<S-k>", ":call vimspector#StepOut()<CR>", opts)
 keymap("n", "<S-l>", ":call vimspector#StepInto()<CR>", opts)
 
+ -- spellchecking
+keymap("n", "<M-\\>", ":set spell!<CR>", opts)
+

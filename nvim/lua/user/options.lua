@@ -29,3 +29,4 @@ for k, v in pairs(options) do
 end
 
 vim.cmd "let g:python3_host_prog = '/usr/bin/python3'"
+vim.cmd "set nohidden"
