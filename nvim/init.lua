@@ -8,4 +8,5 @@ require "austino.spellcheck"
 
 require "austino.config.lualine"
 require "austino.config.nvim-tree"
+require "austino.config.fzf"
 
