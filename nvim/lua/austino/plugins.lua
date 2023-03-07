@@ -42,36 +42,25 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
-    use "wbthomason/packer.nvim"           -- Have packer manage itself
+    use "wbthomason/packer.nvim"           -- packer manages itself
 
     use "morhetz/gruvbox"                  -- gruvbox colorscheme
-    use "vim-airline/vim-airline"          -- slick statusbar
-    use "vim-airline/vim-airline-themes"   -- slick statusbar themes
 
-    use "nvim-tree/nvim-tree.lua"
-    use "nvim-tree/nvim-web-devicons"
+    use 'nvim-lualine/lualine.nvim'        -- slick statusbar
 
---    use "scrooloose/nerdtree"              -- Directory navigator
---    use { 
---        "nvim-tree/nvim-tree.lua",
---        requires = {
---            "nvim-tree/nvim-web-devicons",
---        },
---    }
+    use "nvim-tree/nvim-web-devicons"      -- slick icons
+    use "nvim-tree/nvim-tree.lua"          -- directory navigator
 
-    use "puremourning/vimspector"          -- Debugger
+    use "puremourning/vimspector"          -- debugger
 
     use "junegunn/fzf"                     -- fuzzy finder
     use "junegunn/fzf.vim"                 -- fuzzy finder
 
     use "airblade/vim-rooter"              -- change pwd to project root when opening file
 
-     -- conquer of completion
-    use { "neoclide/coc.nvim", branch = "release" }
-
     use 'norcalli/nvim-colorizer.lua'      -- highlight color codes
 
-    use 'nvim-lualine/lualine.nvim'
+    use { "neoclide/coc.nvim", branch = "release" } -- completion
 
     if PACKER_BOOTSTRAP then
       require("packer").sync()
