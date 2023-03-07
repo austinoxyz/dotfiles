@@ -1,5 +1,8 @@
  -- lua/austino/config/lualine.lua
 
+local bkg = vim.api.nvim_eval('synIDattr(hlID("Normal"), "bg")')
+print("Background color: " .. bkg)
+
 local colors = {
     black        = '#282828',
     white        = '#ebdbb2',
@@ -8,48 +11,53 @@ local colors = {
     blue         = '#83a598',
     yellow       = '#fe8019',
     purple       = '#8c04f4',
-    gray         = '#a89984',
+    lightgray         = '#a89984',
     darkgray     = '#282828',
-    lightgray    = '#504945',
+    gray    = '#504945',
     inactivegray = '#7c6f64',
+    background   = bkg,
 }
 
 local gruvbox_ish = {
     normal = {
-        a = {bg = colors.gray, fg = colors.black, gui = 'bold'},
-        b = {bg = colors.lightgray, fg = colors.white},
-        c = {bg = colors.darkgray, fg = colors.darkgray},
-        z = {bg = colors.lightgray, fg = colors.white},
+        a = { bg = colors.lightgray, fg = colors.black, gui = 'bold'},
+        b = { bg = colors.gray,  fg = colors.white },
+
+        -- foreground must be same color as background here as there is a 
+        -- strange output of carets filling the entire component 
+        -- when using most other plugins (i.e. ^^^^^^^^^^^^^^^^^^)
+        c = { bg = colors.background, fg = bkg},
+        z = { bg = colors.gray,  fg = colors.white },
     },
     insert = {
         a = {bg = colors.red, fg = colors.black, gui = 'bold'},
-        b = {bg = colors.lightgray, fg = colors.white},
-        c = {bg = colors.darkgray, fg = colors.darkgray},
-        z = {bg = colors.lightgray, fg = colors.white},
+        b = {bg = colors.gray, fg = colors.white},
+        c = {bg = colors.background, fg = colors.background},
+        z = {bg = colors.gray, fg = colors.white},
     },
     visual = {
         a = {bg = colors.yellow, fg = colors.black, gui = 'bold'},
-        b = {bg = colors.lightgray, fg = colors.white},
-        c = {bg = colors.darkgray, fg = colors.darkgray},
-        z = {bg = colors.lightgray, fg = colors.white},
+        b = {bg = colors.gray, fg = colors.white},
+        c = {bg = colors.background, fg = colors.background},
+        z = {bg = colors.gray, fg = colors.white},
     },
     replace = {
         a = {bg = colors.blue, fg = colors.black, gui = 'bold'},
-        b = {bg = colors.lightgray, fg = colors.white},
-        c = {bg = colors.darkgray, fg = colors.darkgray},
-        z = {bg = colors.lightgray, fg = colors.white},
+        b = {bg = colors.gray, fg = colors.white},
+        c = {bg = colors.background, fg = colors.background},
+        z = {bg = colors.gray, fg = colors.white},
     },
     command = {
         a = {bg = colors.purple, fg = colors.black, gui = 'bold'},
-        b = {bg = colors.lightgray, fg = colors.white},
-        c = {bg = colors.darkgray, fg = colors.darkgray},
-        z = {bg = colors.lightgray, fg = colors.white},
+        b = {bg = colors.gray, fg = colors.white},
+        c = {bg = colors.background, fg = colors.background},
+        z = {bg = colors.gray, fg = colors.white},
     },
     inactive = {
-        a = {bg = colors.darkgray, fg = colors.gray, gui = 'bold'},
-        b = {bg = colors.darkgray, fg = colors.gray},
-        c = {bg = colors.darkgray, fg = colors.darkgray},
-        z = {bg = colors.lightgray, fg = colors.white},
+        a = {bg = colors.gray, fg = colors.lightgray, gui = 'bold'},
+        b = {bg = colors.lightgray, fg = colors.lightgray},
+        c = {bg = colors.background, fg = colors.background},
+        z = {bg = colors.gray, fg = colors.white},
     }
 }
 
@@ -61,40 +69,52 @@ require('lualine').setup {
     },
     sections = {
         lualine_a = {
-            { 'mode', separator = { left = '    ', right = '' }, padding = 2},
+            { 
+                'mode', 
+                separator = { left = '    ', right = '' }, 
+                padding = 2
+            },
         },
         lualine_b = { 
-            { 'branch', separator = { left = '', right = '' }, }, 
             { 
-                'filename', 
+                'branch', 
+                separator = { left = '', right = '' }, 
+            }, 
+            { 
+                'filename',
                 show_modified_status = true,
-                separator = { left = '', right = '' }, 
+                separator = { left = '', right = '' },
                 symbols = {
-                    modified = ' ●',      -- Text to show when the buffer is modified
-                    alternate_file = '#', -- Text to show to identify the alternate file
-                    directory =  '',     -- Text to show when the buffer is a directory
+                    modified = ' ●',
+                    alternate_file = '#',
+                    directory = '',
                 },
             }, 
         },
-        lualine_c = { 
-            { separator = { left = '', right = '' }, },
-        },
+        lualine_c = { { separator = { left = '', right = '' }, }, },
         lualine_x = {},
-        lualine_y = { },
+        lualine_y = {},
         lualine_z = {
-            { 'filetype', separator = { left = '', right = '' }, },
-            { 'encoding', separator = { left = '', right = '' }, },
-            { 'progress', separator = { left = '', right = '' }, right_padding = 0, left_padding = 2},
-            { 'location', separator = { left = '', right = '    ' }, padding = 0 },
+            { 
+                'filetype', 
+                separator = { left = '', right = '' }, 
+            },
+            { 
+                'encoding', 
+                separator = { left = '', right = '' }, 
+            },
+            { 
+                'progress', 
+                separator = { left = '', right = '' }, 
+                right_padding = 0, 
+                left_padding = 2
+            },
+            { 
+                'location', 
+                separator = { left = '', right = '    ' }, 
+                padding = 0 
+            },
         },
---        lualine_y = { 
---            { 'filetype', separator = { left = '', right = '' } },
---            'encoding', 
---        },
---        lualine_z = {
---            { 'progress', separator = { left = '', right = '' }, right_padding = 0, left_padding = 2},
---            { 'location', separator = { left = '', right = '' }, padding = 0 },
---        },
     },
     tabline = {},
     extensions = {},
