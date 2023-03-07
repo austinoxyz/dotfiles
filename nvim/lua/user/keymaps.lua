@@ -20,8 +20,9 @@ vim.g.maplocalleader = " "
 
 
  -- toggle line wrapping
-keymap("n", "<M-=>", ":set wrap<CR>", opts)
-keymap("n", "<M-+>", ":set nowrap<CR>", opts)
+keymap("n", "<m-1>", ":set wrap<cr>", opts)
+keymap("n", "<m-!>", ":set nowrap<cr>", opts)
+
 
  -- remap C-c to <esc>
 keymap("n", "<c-c>", "<esc>", opts)
@@ -30,26 +31,26 @@ keymap("v", "<c-c>", "<esc>", opts)
 keymap("o", "<c-c>", "<esc>", opts)
 
  -- navigate tabs
-keymap("n", "<M-p>", ":+tabn<CR>", opts)
-keymap("n", "<M-o>", ":-tabn<CR>", opts)
+keymap("n", "<m-p>", ":+tabn<cr>", opts)
+keymap("n", "<m-o>", ":-tabn<cr>", opts)
 
  -- navigate buffers
-keymap("n", "<M-0>", ":+b<CR>", opts)
-keymap("n", "<M-9>", ":-b<CR>", opts)
+keymap("n", "<m-0>", ":+b<cr>", opts)
+keymap("n", "<m-9>", ":-b<cr>", opts)
 
  -- navigate ctags
-keymap("n", "<M-]>", "<c-]>", opts)
-keymap("n", "<M-[>", "<c-t>", opts)
+keymap("n", "<m-]>", "<c-]>", opts)
+keymap("n", "<m-[>", "<c-t>", opts)
 
  -- open and close tabs
-keymap("n", "<M-i>", ":tabnew ", opts)
-keymap("n", "<M-y>", ":tabclose<CR>", opts)
+keymap("n", "<m-i>", ":tabnew ", opts)
+keymap("n", "<m-y>", ":tabclose<cr>", opts)
 
  -- move curosr between windows alt Alt+[vimkey]
-keymap("n", "<M-h>", "<c-w>h", opts)
-keymap("n", "<M-l>", "<c-w>l", opts)
-keymap("n", "<M-k>", "<c-w>k", opts)
-keymap("n", "<M-j>", "<c-w>j", opts)
+keymap("n", "<m-h>", "<c-w>h", opts)
+keymap("n", "<m-l>", "<c-w>l", opts)
+keymap("n", "<m-k>", "<c-w>k", opts)
+keymap("n", "<m-j>", "<c-w>j", opts)
 
  -- move cursor between windows with arrow keys
 keymap("n", "<Left>",  "<c-w>h", opts)
@@ -67,41 +68,44 @@ keymap("n", "<leader>-", "5<c-w>-", opts)
 keymap("t", "<Esc>", "<C-\\><C-n>", opts)
 
  -- edit vimrc, vertically or horizontally if desired
-keymap("n", "<leader>`e", ":e   $MYVIMRC<CR>", opts)
-keymap("n", "<leader>`v", ":vsp $MYVIMRC<CR>", opts)
-keymap("n", "<leader>`h", ":sp  $MYVIMRC<CR>", opts)
+keymap("n", "<leader>`e", ":e   $MYVIMRC<cr>", opts)
+keymap("n", "<leader>`v", ":vsp $MYVIMRC<cr>", opts)
+keymap("n", "<leader>`h", ":sp  $MYVIMRC<cr>", opts)
  -- edit current .vimspector.json, vertically or horizontally if desired
-keymap("n", "<leader>1e", ":e   ./.vimspector.json<CR>", opts)
-keymap("n", "<leader>1v", ":vsp ./.vimspector.json<CR>", opts)
-keymap("n", "<leader>1h", ":sp  ./.vimspector.json<CR>", opts)
+keymap("n", "<leader>1e", ":e   ./.vimspector.json<cr>", opts)
+keymap("n", "<leader>1v", ":vsp ./.vimspector.json<cr>", opts)
+keymap("n", "<leader>1h", ":sp  ./.vimspector.json<cr>", opts)
  -- edit current Makefile, vertically or horizontally if desired
-keymap("n", "<leader>2e", ":e   Makefile<CR>", opts)
-keymap("n", "<leader>2v", ":vsp Makefile<CR>", opts)
-keymap("n", "<leader>2h", ":sp  Makefile<CR>", opts)
+keymap("n", "<leader>2e", ":e   Makefile<cr>", opts)
+keymap("n", "<leader>2v", ":vsp Makefile<cr>", opts)
+keymap("n", "<leader>2h", ":sp  Makefile<cr>", opts)
 
  -- generate ctags file for cpp projects
-keymap("n", "<leader>=", ":!ctags src/*.cpp include/*.hpp main.cpp<CR>", opts)
+keymap("n", "<leader>=", ":!ctags src/*.cpp include/*.hpp main.cpp<cr>", opts)
 
  -- junegunn/fzf 
-keymap("n", "<leader>h", ":FZF<CR>", opts)
-keymap("n", "<leader>f", ":Files<CR>", opts)
-keymap("n", "<leader>t", ":Tags<CR>", opts)
+keymap("n", "<leader>h", ":FZF<cr>", opts)
+keymap("n", "<leader>f", ":Files<cr>", opts)
+keymap("n", "<leader>t", ":Tags<cr>", opts)
 
  -- vimspector keymappings
-keymap("n", "<leader>da", ":call vimspector#Launch()<CR>", opts)
-keymap("n", "<leader>dp", ":call vimspector#Pause()<CR>", opts)
-keymap("n", "<leader>dq", ":call vimspector#Stop()<CR>", opts)
-keymap("n", "<leader>dx", ":call vimspector#Reset()<CR>", opts)
-keymap("n", "<leader>dc", ":call vimspector#Continue()<CR>", opts)
-keymap("n", "<leader>dh", ":call vimspector#ToggleBreakpoint()<CR>", opts)
-keymap("n", "<leader>de", ":call vimspector#ToggleConditionalBreakpoint()<CR>", opts)
-keymap("n", "<leader>dz", ":call vimspector#ClearBreakpoints()<CR>", opts)
-keymap("n", "<S-y>", ":call vimspector#DownFrame()<CR>", opts)
-keymap("n", "<S-u>", ":call vimspector#UpFrame()<CR>", opts)
-keymap("n", "<S-j>", ":call vimspector#StepOver()<CR>", opts)
-keymap("n", "<S-k>", ":call vimspector#StepOut()<CR>", opts)
-keymap("n", "<S-l>", ":call vimspector#StepInto()<CR>", opts)
+keymap("n", "<leader>da", ":call vimspector#Launch()<cr>", opts)
+keymap("n", "<leader>dp", ":call vimspector#Pause()<cr>", opts)
+keymap("n", "<leader>dq", ":call vimspector#Stop()<cr>", opts)
+keymap("n", "<leader>dx", ":call vimspector#Reset()<cr>", opts)
+keymap("n", "<leader>dc", ":call vimspector#Continue()<cr>", opts)
+keymap("n", "<leader>dh", ":call vimspector#ToggleBreakpoint()<cr>", opts)
+keymap("n", "<leader>de", ":call vimspector#ToggleConditionalBreakpoint()<cr>", opts)
+keymap("n", "<leader>dz", ":call vimspector#ClearBreakpoints()<cr>", opts)
+keymap("n", "<s-y>", ":call vimspector#DownFrame()<cr>", opts)
+keymap("n", "<s-u>", ":call vimspector#UpFrame()<cr>", opts)
+keymap("n", "<s-j>", ":call vimspector#StepOver()<cr>", opts)
+keymap("n", "<s-k>", ":call vimspector#StepOut()<cr>", opts)
+keymap("n", "<s-l>", ":call vimspector#StepInto()<cr>", opts)
 
  -- spellchecking
-keymap("n", "<M-\\>", ":set spell!<CR>", opts)
+keymap("n", "<m-\\>", ":set spell!<cr>", opts)
 
+ -- toggle highlighting of color codes
+keymap("n", "<m-2>", ":ColorizerToggle<cr>", opts)
+keymap("n", "<m-@>", ":ColorizerReloadAllBuffers<cr>", opts)

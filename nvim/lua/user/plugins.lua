@@ -69,6 +69,8 @@ return packer.startup(function(use)
      -- conquer of completion
     use { "neoclide/coc.nvim", branch = "release" }
 
+    use 'norcalli/nvim-colorizer.lua'      -- highlight color codes
+
     if PACKER_BOOTSTRAP then
       require("packer").sync()
     end
