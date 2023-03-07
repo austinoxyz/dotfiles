@@ -1,9 +1,11 @@
-require "user.options"
-require "user.keymaps"
-require "user.plugins"
-require "user.colorscheme"
-require "user.spellcheck"
+ -- init.lua
 
-require "user.config.vim-airline"
-require "user.config.nvim-tree"
+require "austino.options"
+require "austino.keymaps"
+require "austino.plugins"
+require "austino.colorscheme"
+require "austino.spellcheck"
+
+require "austino.config.lualine"
+require "austino.config.nvim-tree"
 

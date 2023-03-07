@@ -1,3 +1,5 @@
+ -- lua/austino/keymaps.lua
+
 local opts = { noremap = true, silent = true }
 
 local term_opts = { silent = true }
@@ -35,8 +37,8 @@ keymap("n", "<m-p>", ":+tabn<cr>", opts)
 keymap("n", "<m-o>", ":-tabn<cr>", opts)
 
  -- navigate buffers
-keymap("n", "<m-0>", ":+b<cr>", opts)
 keymap("n", "<m-9>", ":-b<cr>", opts)
+keymap("n", "<m-0>", ":+b<cr>", opts)
 
  -- navigate ctags
 keymap("n", "<m-]>", "<c-]>", opts)
@@ -45,6 +47,9 @@ keymap("n", "<m-[>", "<c-t>", opts)
  -- open and close tabs
 keymap("n", "<m-i>", ":tabnew ", opts)
 keymap("n", "<m-y>", ":tabclose<cr>", opts)
+
+ -- close buffer
+keymap("n", "<m-7>", ":bd<cr>", opts)
 
  -- move curosr between windows alt Alt+[vimkey]
 keymap("n", "<m-h>", "<c-w>h", opts)
@@ -83,10 +88,11 @@ keymap("n", "<leader>2h", ":sp  Makefile<cr>", opts)
  -- generate ctags file for cpp projects
 keymap("n", "<leader>=", ":!ctags src/*.cpp include/*.hpp main.cpp<cr>", opts)
 
- -- junegunn/fzf 
+ -- "applications"
 keymap("n", "<leader>h", ":FZF<cr>", opts)
 keymap("n", "<leader>f", ":Files<cr>", opts)
 keymap("n", "<leader>t", ":Tags<cr>", opts)
+keymap("n", "<leader>n", ":NvimTreeOpen<cr>", opts)
 
  -- vimspector keymappings
 keymap("n", "<leader>da", ":call vimspector#Launch()<cr>", opts)

@@ -1,4 +1,4 @@
- -- lua/user/config/nvim-tree.lua
+ -- lua/austino/config/nvim-tree.lua
 
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then

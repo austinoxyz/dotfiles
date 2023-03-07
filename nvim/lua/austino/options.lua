@@ -1,4 +1,4 @@
- -- lua/user/options.lua
+ -- lua/austino/options.lua
 
 local options = {
     syntax		    = "enable",

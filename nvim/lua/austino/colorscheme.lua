@@ -1,4 +1,4 @@
- -- lua/user/colorscheme.lua
+ -- lua/austino/colorscheme.lua
  
 local colorscheme = "gruvbox"
 

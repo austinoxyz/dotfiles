@@ -1,4 +1,4 @@
- -- lua/user/plugins.lua
+ -- lua/austino/plugins.lua
 
 local fn = vim.fn
 
@@ -70,6 +70,8 @@ return packer.startup(function(use)
     use { "neoclide/coc.nvim", branch = "release" }
 
     use 'norcalli/nvim-colorizer.lua'      -- highlight color codes
+
+    use 'nvim-lualine/lualine.nvim'
 
     if PACKER_BOOTSTRAP then
       require("packer").sync()
