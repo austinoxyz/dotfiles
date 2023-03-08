@@ -1,8 +1,0 @@
-/usr/bin/firefox
-/usr/bin/keepassxc
-/usr/bin/nvim
-/usr/bin/qbittorrent
-/usr/bin/gimp
-/usr/bin/virt-manager
-/usr/bin/urxvt
-/usr/bin/vim
