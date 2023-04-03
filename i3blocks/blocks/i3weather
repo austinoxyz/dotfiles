@@ -3,10 +3,9 @@
 # we dont want the weather if vpn is connected
 vpn_status="$(echo "$(mullvad status)" | awk '{print $1}')"
 if [ "$vpn_status" = "Connected" ]; then
-    echo "<span foreground='$key_color' background='$left_key_color' size='x-large'></span>\
-<span background='$key_color'>\
-<span foreground='#F70400' size='small' rise='10'> 🗙</span>\
-</span>"
+    echo "🗙"
+    echo "🗙"
+    echo \#F70400
     exit 0
 fi
 
