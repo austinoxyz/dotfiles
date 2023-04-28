@@ -1,13 +1,31 @@
 # ~/.config/i3/config
 
 set $mod Mod4
+set $up k
+set $down j
+set $left h
+set $right l
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $steam_workspace_n $ws4
+set $display_left DP-0
+set $display_right DP-2
 
-# for two monitor setup, adjust DP-[X] and --right-of as necessary
-exec xrandr --output DP-0 --auto --output DP-2 --auto --right-of DP-0
+# configure two monitor setup, adjust DP-[x] as needed
+exec xrandr --output $display_left --mode 1920x1080 --rate 60.00 --brightness 1 --gamma 1:1:1 --output $display_right --right-of $display_left --mode 1920x1080 --rate 144.00 --brightness 1 --gamma 1:1:1 --crtc 1
 force_xinerama yes
 
 # remove title from windows
 for_window [class="^.*"] border pixel 2
+
+# start specified applications floating
+for_window [class="^GNU Image Manipulation Program$"] floating enable
+for_window [class="^qBittorrent"] floating enable
+
+for_window [class="^qBittorrent"] floating enable
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
@@ -19,12 +37,10 @@ bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -R
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $up j
-set $down k
-set $left h
-set $right l
+bindsym $mod+Ctrl+$left move workspace $ws2
+bindsym $mod+Ctrl+$right move workspace $ws2
+
+bindsym $mod+Alt+$left focus output 
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -35,16 +51,24 @@ bindsym $mod+Return exec $TERMINAL
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# applications
+# add the current item in the clipboard to my personal bookmarks
+bindsym $mod+Shift+b exec xclip -o | xargs add_bookmark
 
-# start dmenu (a program launcher)
-# TODO restrict this to only pull from a list of whitelisted binaries rather than the entire path
-bindsym $mod+d exec --no-startup-id dmenu_run -i -m 1 -p "launch:"
+# APPLICATIONS
+bindsym $mod+0 exec --no-startup-id dmenu_run -i -m 1 -p "launch:" -fn "iosevka-11"
 
-# launch neovim within alacritty
-# TODO fix this so the 
-bindsym $mod+6 exec $TERMINAL -e 'PATH=$PATH:$HOME/.config/nvim/lua/user/ /usr/bin/nvim'
-bindsym $mod+7 exec --no-startup-id firefox
+bindsym $mod+d exec --no-startup-id launch_app
+bindsym $mod+b exec --no-startup-id launch_bookmark
+bindsym $mod+s exec --no-startup-id launch_search
+bindsym $mod+x exec --no-startup-id launch_cmd
+
+
+bindsym $mod+Shift+n exec --no-startup-id $TERMINAL -e 'nvim'
+bindsym $mod+Shift+f exec --no-startup-id firefox
+bindsym $mod+Shift+p exec --no-startup-id keepassxc
+bindsym $mod+Shift+g exec --no-startup-id gimp
+bindsym $mod+Shift+t exec --no-startup-id $TERMINAL -e 'chatgpt'
+bindsym $mod+Shift+v exec --no-startup-id virt-manager
 
 # change focus
 bindsym $mod+$left focus left
@@ -66,7 +90,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+p layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -85,14 +109,6 @@ bindsym $mod+Shift+minus move scratchpad
 # show and focus next scratchpad or hide focused scratchpad.
 bindsym $mod+minus scratchpad show
 
-# only using 5 workspaces
-# reserving 6-10 for other keybindings as well as 
-# restricting myself to more compact workflow
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
 
 # switch to workspace (n)
 bindsym $mod+1 workspace number $ws1
@@ -118,6 +134,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window
+bindsym $mod+r mode "resize"
 mode "resize" {
     bindsym $left    resize shrink width 10 px or 10 ppt
     bindsym $down    resize grow height 10 px or 10 ppt
@@ -132,9 +149,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym $mod+r mode "default"
 }
-bindsym $mod+r mode "resize"
 
-# i3blocks, two configs available
 bar {
     position top
     mode dock
@@ -142,26 +157,31 @@ bar {
     tray_padding 4
     strip_workspace_numbers yes
 
-    # airblocks
-#    font pango: Droid Sans Mono for Powerline 14
-#    separator_symbol " "
-#    status_command I3SCRIPTS=~/.config/i3blocks/airblocks i3blocks -c ~/.config/i3blocks/airblocks/config
-
-    # blocks
     font pango: Font Awesome Mono 10
     separator_symbol " | "
-    status_command I3SCRIPTS=~/.config/i3blocks/blocks i3blocks -c ~/.config/i3blocks/blocks/config
-
+    status_command I3SCRIPTS=~/Scripts/i3blocks/blocks i3blocks -c ~/.config/i3blocks/config_blocks
 
     colors {
-
-    # airblocks
-#        background #2e3440
-#        separator #ffffff
-
-    # blocks
         background #121212
         statusline #d8dee9
         separator #969696
     }
 }
+
+## airblocks config
+#bar {
+#    position top
+#    mode dock
+#    tray_output primary
+#    tray_padding 4
+#    strip_workspace_numbers yes
+#
+#    font pango: Droid Sans Mono for Powerline 14
+#    separator_symbol " "
+#    status_command I3SCRIPTS=~/.config/i3blocks/airblocks i3blocks -c ~/.config/i3blocks/airblocks/config
+#
+#    colors {
+#        background #2e3440
+#        separator #ffffff
+#    }
+#}
