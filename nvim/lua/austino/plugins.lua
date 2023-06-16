@@ -56,11 +56,13 @@ return packer.startup(function(use)
     use "junegunn/fzf"                     -- fuzzy finder
     use "junegunn/fzf.vim"                 -- fuzzy finder
 
-    use "airblade/vim-rooter"              -- change pwd to project root when opening file
-
     use 'norcalli/nvim-colorizer.lua'      -- highlight color codes
 
     use { "neoclide/coc.nvim", branch = "release" } -- completion
+
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" } -- treesitter highlighting
+
+
 
     if PACKER_BOOTSTRAP then
       require("packer").sync()

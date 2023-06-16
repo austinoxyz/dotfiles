@@ -1,6 +1,16 @@
 {
   "suggest.noselect": true,
   "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cc", "cpp", "c++", "cxx", "objc", "objcpp", "h", "hpp"],
+      "rootPatterns": [".ccls-root", "compile_commands.json"],
+      "initializationOptions": {
+          "cache": {
+            "directory": ".ccls-cache"
+          }
+        }
+    },
     "python": {
       "command": "python",
       "args": [

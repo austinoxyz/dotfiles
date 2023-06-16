@@ -1,7 +1,6 @@
  -- lua/austino/config/lualine.lua
 
 local bkg = vim.api.nvim_eval('synIDattr(hlID("Normal"), "bg")')
-print("Background color: " .. bkg)
 
 local colors = {
     black        = '#282828',

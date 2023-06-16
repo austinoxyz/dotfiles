@@ -1,8 +1,7 @@
  -- lua/austino/keymaps.lua
 
 local opts = { noremap = true, silent = true }
-
-local term_opts = { silent = true }
+local noremap_only = { noremap = true }
 
  -- shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -20,12 +19,6 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
-
- -- toggle line wrapping
-keymap("n", "<m-1>", ":set wrap<cr>", opts)
-keymap("n", "<m-!>", ":set nowrap<cr>", opts)
-
-
  -- remap C-c to <esc>
 keymap("n", "<c-c>", "<esc>", opts)
 keymap("i", "<c-c>", "<esc>", opts)
@@ -37,21 +30,38 @@ keymap("n", "<m-p>", ":+tabn<cr>", opts)
 keymap("n", "<m-o>", ":-tabn<cr>", opts)
 
  -- navigate buffers
-keymap("n", "<m-9>", ":-b<cr>", opts)
-keymap("n", "<m-0>", ":+b<cr>", opts)
+keymap("n", "<m-->", ":-b<cr>", opts)
+keymap("n", "<m-=>", ":+b<cr>", opts)
 
  -- navigate ctags
 keymap("n", "<m-]>", "<c-]>", opts)
 keymap("n", "<m-[>", "<c-t>", opts)
 
+ -- generate ctags file for cpp or c projects
+keymap("n", "<m-3>", ":!ctags -R --exclude=.ccls-cache .<cr>", opts)
+
+ -- open header and src in vertically split new tab
+keymap("n", "<m-;>", ":OpenCTab ", noremap_only)
+
+-- make clean all
+keymap("n", "<m-\\>", ":make clean all<cr>", noremap_only)
+
  -- open and close tabs
-keymap("n", "<m-i>", ":tabnew ", opts)
+keymap("n", "<m-i>", ":tabnew ", noremap_only)
 keymap("n", "<m-y>", ":tabclose<cr>", opts)
+
+ -- toggle line wrapping
+keymap("n", "<m-1>", ":set wrap<cr>", opts)
+keymap("n", "<m-!>", ":set nowrap<cr>", opts)
+
+ -- toggle highlighting of color codes
+keymap("n", "<m-2>", ":ColorizerToggle<cr>", opts)
+keymap("n", "<m-@>", ":ColorizerReloadAllBuffers<cr>", opts)
 
  -- close buffer
 keymap("n", "<m-7>", ":bd<cr>", opts)
 
- -- move curosr between windows alt Alt+[vimkey]
+ -- move cursor between windows alt Alt+[vimkey]
 keymap("n", "<m-h>", "<c-w>h", opts)
 keymap("n", "<m-l>", "<c-w>l", opts)
 keymap("n", "<m-k>", "<c-w>k", opts)
@@ -84,34 +94,46 @@ keymap("n", "<leader>1h", ":sp  ./.vimspector.json<cr>", opts)
 keymap("n", "<leader>2e", ":e   Makefile<cr>", opts)
 keymap("n", "<leader>2v", ":vsp Makefile<cr>", opts)
 keymap("n", "<leader>2h", ":sp  Makefile<cr>", opts)
+ -- edit current README.md, vertically or horizontally if desired
+keymap("n", "<leader>3e", ":e   README.md<cr>", opts)
+keymap("n", "<leader>3v", ":vsp README.md<cr>", opts)
+keymap("n", "<leader>3h", ":sp  README.md<cr>", opts)
 
- -- generate ctags file for cpp projects
-keymap("n", "<leader>=", ":!ctags src/*.cpp include/*.hpp main.cpp<cr>", opts)
+
+-- hide highlighting from last search until next search
+keymap("n", "<m-/>", ":noh<cr>", opts)
 
  -- "applications"
 keymap("n", "<leader>h", ":FZF<cr>", opts)
 keymap("n", "<leader>f", ":Files<cr>", opts)
 keymap("n", "<leader>t", ":Tags<cr>", opts)
+keymap("n", "<leader>r", ":Rg<cr>", opts)
 keymap("n", "<leader>n", ":NvimTreeOpen<cr>", opts)
 
  -- vimspector keymappings
-keymap("n", "<leader>da", ":call vimspector#Launch()<cr>", opts)
-keymap("n", "<leader>dp", ":call vimspector#Pause()<cr>", opts)
-keymap("n", "<leader>dq", ":call vimspector#Stop()<cr>", opts)
-keymap("n", "<leader>dx", ":call vimspector#Reset()<cr>", opts)
-keymap("n", "<leader>dc", ":call vimspector#Continue()<cr>", opts)
-keymap("n", "<leader>dh", ":call vimspector#ToggleBreakpoint()<cr>", opts)
-keymap("n", "<leader>de", ":call vimspector#ToggleConditionalBreakpoint()<cr>", opts)
-keymap("n", "<leader>dz", ":call vimspector#ClearBreakpoints()<cr>", opts)
-keymap("n", "<s-y>", ":call vimspector#DownFrame()<cr>", opts)
-keymap("n", "<s-u>", ":call vimspector#UpFrame()<cr>", opts)
-keymap("n", "<s-j>", ":call vimspector#StepOver()<cr>", opts)
-keymap("n", "<s-k>", ":call vimspector#StepOut()<cr>", opts)
-keymap("n", "<s-l>", ":call vimspector#StepInto()<cr>", opts)
+--keymap("n", "<m-p>", ":call vimspector#Pause()<cr>", opts)
+keymap("n", "<m-q>", ":call vimspector#Reset()<cr>", opts)
+keymap("n", "<m-w>", ":call vimspector#Launch()<cr>", opts)
+keymap("n", "<m-e>", ":call vimspector#Stop()<cr>", opts)
+keymap("n", "<m-c>", ":call vimspector#Continue()<cr>", opts)
+keymap("n", "<m-x>", ":call vimspector#ToggleBreakpoint()<cr>", opts)
+keymap("n", "<m-v>", ":call vimspector#ToggleConditionalBreakpoint()<cr>", opts)
+keymap("n", "<m-z>", ":call vimspector#ClearBreakpoints()<cr>", opts)
+keymap("n", "<m-a>", ":call vimspector#StepOver()<cr>", opts)
+keymap("n", "<m-s>", ":call vimspector#StepInto()<cr>", opts)
+keymap("n", "<m-d>", ":call vimspector#StepOut()<cr>", opts)
+keymap("n", "<m-r>", ":call vimspector#UpFrame()<cr>", opts)
+keymap("n", "<m-f>", ":call vimspector#DownFrame()<cr>", opts)
 
  -- spellchecking
-keymap("n", "<m-\\>", ":set spell!<cr>", opts)
+keymap("n", "<m-=>", ":set spell!<cr>", opts)
 
- -- toggle highlighting of color codes
-keymap("n", "<m-2>", ":ColorizerToggle<cr>", opts)
-keymap("n", "<m-@>", ":ColorizerReloadAllBuffers<cr>", opts)
+ ---- coc keymaps
+local keyset = vim.keymap.set
+local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
+
+ -- completion with Tab and Shift+Tab
+keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', coc_opts)
+keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], coc_opts)
+
+
