@@ -10,12 +10,13 @@ set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
-set $steam_workspace_n $ws4
-set $display_left DP-0
-set $display_right DP-2
+
+set $sleep 0.2
 
 # configure two monitor setup, adjust DP-[x] as needed
-exec xrandr --output $display_left --mode 1920x1080 --rate 60.00 --brightness 1 --gamma 1:1:1 --output $display_right --right-of $display_left --mode 1920x1080 --rate 144.00 --brightness 1 --gamma 1:1:1 --crtc 1
+set $display_right DP-2
+set $display_left DP-0
+exec xrandr --output $display_left --primary --mode 1920x1080 --rate 144.00 --brightness 1 --gamma 1:1:1 --output $display_right --right-of $display_left --mode 1920x1080 --rate 60.00 --brightness 1 --gamma 1:1:1 --crtc 1
 force_xinerama yes
 
 # remove title from windows
@@ -51,16 +52,18 @@ bindsym $mod+Return exec $TERMINAL
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# add the current item in the clipboard to my personal bookmarks
-bindsym $mod+Shift+b exec xclip -o | xargs add_bookmark
 
 # APPLICATIONS
 bindsym $mod+0 exec --no-startup-id dmenu_run -i -m 1 -p "launch:" -fn "iosevka-11"
 
 bindsym $mod+d exec --no-startup-id launch_app
-bindsym $mod+b exec --no-startup-id launch_bookmark
 bindsym $mod+s exec --no-startup-id launch_search
 bindsym $mod+x exec --no-startup-id launch_cmd
+
+bindsym $mod+Shift+o exec --no-startup-id launch_bookmark
+bindsym $mod+b exec --no-startup-id launch_quick_bookmark
+bindsym $mod+Shift+b exec --no-startup-id add_current_url_to_bookmarks
+
 
 
 bindsym $mod+Shift+n exec --no-startup-id $TERMINAL -e 'nvim'
@@ -69,6 +72,9 @@ bindsym $mod+Shift+p exec --no-startup-id keepassxc
 bindsym $mod+Shift+g exec --no-startup-id gimp
 bindsym $mod+Shift+t exec --no-startup-id $TERMINAL -e 'chatgpt'
 bindsym $mod+Shift+v exec --no-startup-id virt-manager
+
+# mail
+bindsym $mod+Shift+m exec --no-startup-id firefox -new-window "https://gmail.com"              
 
 # change focus
 bindsym $mod+$left focus left
@@ -109,6 +115,8 @@ bindsym $mod+Shift+minus move scratchpad
 # show and focus next scratchpad or hide focused scratchpad.
 bindsym $mod+minus scratchpad show
 
+# switch to random wallpaper
+bindsym $mod+Prior exec wal -i ${WALLPAPERS_DIR} -o ${WALSCRIPTS_DIR}/genzathurarc --saturate 0.85 -b "#323232" > /dev/null 2>&1
 
 # switch to workspace (n)
 bindsym $mod+1 workspace number $ws1
@@ -118,11 +126,11 @@ bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
 
 # move focused container to workspace (n)
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+1 move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5; workspace number $ws5
 
 # reload the config
 bindsym $mod+Shift+c reload
@@ -151,7 +159,7 @@ mode "resize" {
 }
 
 bar {
-    position top
+    position bottom
     mode dock
     tray_output primary
     tray_padding 4
@@ -159,7 +167,7 @@ bar {
 
     font pango: Font Awesome Mono 10
     separator_symbol " | "
-    status_command I3SCRIPTS=~/Scripts/i3blocks/blocks i3blocks -c ~/.config/i3blocks/config_blocks
+    status_command I3SCRIPTS=~/Scripts/i3blocks/blocks i3blocks -c ~/.config/i3blocks/config
 
     colors {
         background #121212
@@ -178,7 +186,7 @@ bar {
 #
 #    font pango: Droid Sans Mono for Powerline 14
 #    separator_symbol " "
-#    status_command I3SCRIPTS=~/.config/i3blocks/airblocks i3blocks -c ~/.config/i3blocks/airblocks/config
+#    status_command I3SCRIPTS=~/.config/i3blocks/airblocks i3blocks -c ~/.config/i3blocks/config_airblocks
 #
 #    colors {
 #        background #2e3440

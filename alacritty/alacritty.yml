@@ -1,19 +1,23 @@
 # ~/.config/alacritty/alacritty.yml
 
 env:
-  TERM: alacritty-direct
+  TERM: xterm-256color
 
 colors:
     primary:
-        background: "#282828"
+        background: "#323232"
         foreground: "#ffffff"
+        bright_background: "#383838"
+        bright_foreground: "#ffffff"
+        dim_background: "#383838"
+        dim_foreground: "#ffffff"
     cursor:
-        text: "#21d602"
+        text: "#282828"
         cursor: "#21d602"
 
     # gruvbox dark-medium with bright white text
     normal:
-        black:   '#fbf1c7'
+        black:   '#bdae93'
         red:     '#9d0006'
         green:   '#79740e'
         yellow:  '#b57614'
@@ -71,6 +75,7 @@ window:
     semantic_escape_chars: ',│`|:"'' ()[]{}<>'
     save_to_clipboard: true
     live_config_reload: true
+    opacity: 0.8  # doesn't work with i3
 
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
@@ -78,3 +83,11 @@ key_bindings:
   - { key: Key0, mods: Control, action: ResetFontSize }
   - { key: Equals, mods: Control, action: IncreaseFontSize }
   - { key: Minus, mods: Control, action: DecreaseFontSize }
+  - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
+
+mouse:
+    hide_when_typing: true
+
+visual_bell:
+  animation: EaseOutExpo
+  duration: 1

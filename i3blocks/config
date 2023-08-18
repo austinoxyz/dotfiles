@@ -1,4 +1,14 @@
 
+[traffic]
+command=$I3SCRIPTS/i3traffic
+interval=1
+min_width=🔻999KiB🔺99KiB
+
+[crypto]
+command=$I3SCRIPTS/i3crypto
+interval=600
+min_width=💲99999
+
 [disk]
 command=$I3SCRIPTS/i3disk
 interval=5
@@ -33,7 +43,7 @@ interval=3600
 
 [time]
 command=$I3SCRIPTS/i3time
-interval=5
+interval=1
 
 [weather]
 command=$I3SCRIPTS/i3weather
@@ -45,9 +55,14 @@ interval=3600
 min_width=📦99
 align=center
 
+[net]
+command=$I3SCRIPTS/i3net
+interval=5
+min_width=📶
+
 [volume]
 command=$I3SCRIPTS/i3volume
 interval=1
-min_width=🔊1000%
+min_width=🔊100%
 align=center
 
