@@ -62,8 +62,6 @@ return packer.startup(function(use)
 
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" } -- treesitter highlighting
 
-
-
     if PACKER_BOOTSTRAP then
       require("packer").sync()
     end
