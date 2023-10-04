@@ -7,4 +7,3 @@ vim.cmd "command! -nargs=1 OpenCPPTab tabnew include/<args>.hpp | vsp src/<args>
 vim.cmd "command! -bang -nargs=* CProjGrep call fzf#vim#grep('rg include/ src/ --column --line-number --no-heading --color=always'.shellescape(<q-args>))"
 
 
-
