@@ -53,8 +53,10 @@ return packer.startup(function(use)
 
     use "puremourning/vimspector"          -- debugger
 
+    -- junegunn is amazing
     use "junegunn/fzf"                     -- fuzzy finder
     use "junegunn/fzf.vim"                 -- fuzzy finder
+    use "junegunn/goyo.vim"                -- center text and remove distractions
 
     use 'norcalli/nvim-colorizer.lua'      -- highlight color codes
 
