@@ -1,0 +1,1 @@
+/home/anon/.bash_logout
