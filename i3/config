@@ -47,24 +47,22 @@ bindsym $mod+Alt+$left focus output
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec $TERMINAL
+bindsym $mod+Shift+Return exec $TERMINAL
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 
 # APPLICATIONS
-bindsym $mod+0 exec --no-startup-id dmenu_run -i -m 1 -p "launch:" -fn "iosevka-11"
+bindsym $mod+0 exec --no-startup-id dmenu_run -i -m 2 -p "launch:" -fn "iosevka-11"
 
-bindsym $mod+d exec --no-startup-id launch_app
+bindsym $mod+d exec --no-startup-id quicklaunch
 bindsym $mod+s exec --no-startup-id launch_search
 bindsym $mod+x exec --no-startup-id launch_cmd
 
 bindsym $mod+Shift+o exec --no-startup-id launch_bookmark
 bindsym $mod+b exec --no-startup-id launch_quick_bookmark
-bindsym $mod+Shift+b exec --no-startup-id add_current_url_to_bookmarks
-
-
+bindsym $mod+Shift+b exec --no-startup-id add_bookmark
 
 bindsym $mod+Shift+n exec --no-startup-id $TERMINAL -e 'nvim'
 bindsym $mod+Shift+f exec --no-startup-id firefox
@@ -116,7 +114,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # switch to random wallpaper
-bindsym $mod+Prior exec wal -i ${WALLPAPERS_DIR} -o ${WALSCRIPTS_DIR}/genzathurarc --saturate 0.85 -b "#323232" > /dev/null 2>&1
+bindsym $mod+Prior exec --no-startup-id random_wallpaper
 
 # switch to workspace (n)
 bindsym $mod+1 workspace number $ws1
