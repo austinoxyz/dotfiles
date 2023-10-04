@@ -1,23 +1,24 @@
  -- lua/austino/keymaps.lua
 
+-- Modes
+  -- normal_mode = "n",
+  -- insert_mode = "i",
+  -- visual_mode = "v",
+  -- visual_block_mode = "x",
+  -- term_mode = "t",
+  -- command_mode = "c",
+
 local opts = { noremap = true, silent = true }
+local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 local noremap_only = { noremap = true }
 
- -- shorten function name
 local keymap = vim.api.nvim_set_keymap
+local keyset = vim.keymap.set
 
 -- leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
 
  -- remap C-c to <esc>
 keymap("n", "<c-c>", "<esc>", opts)
@@ -30,28 +31,6 @@ keymap("n", "<m-p>", ":+tabn<cr>", opts)
 keymap("n", "<m-o>", ":-tabn<cr>", opts)
 keymap("n", "<m-P>", ":tabm +1<cr>", opts)
 keymap("n", "<m-O>", ":tabm -1<cr>", opts)
-
- -- navigate buffers
- -- lua/austino/keymaps.lua
-
-local opts = { noremap = true, silent = true }
-local noremap_only = { noremap = true }
-
- -- shorten function name
-local keymap = vim.api.nvim_set_keymap
-
--- leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
 
  -- remap C-c to <esc>
 keymap("n", "<c-c>", "<esc>", opts)
@@ -208,6 +187,9 @@ keymap("n", "<m-l>", "<c-w>l", opts)
 keymap("n", "<m-k>", "<c-w>k", opts)
 keymap("n", "<m-j>", "<c-w>j", opts)
 
+ -- swap (v|h)split around with Alt+S
+keymap("n", "<m-S>", "<c-w>r", opts)
+
  -- move cursor between windows with arrow keys
 keymap("n", "<Left>",  "<c-w>h", opts)
 keymap("n", "<Right>", "<c-w>l", opts)
@@ -271,12 +253,7 @@ keymap("n", "<m-f>", ":call vimspector#DownFrame()<cr>", opts)
  -- spellchecking
 keymap("n", "<m-=>", ":set spell!<cr>", opts)
 
- ---- coc keymaps
-local keyset = vim.keymap.set
-local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
-
  -- completion with Tab and Shift+Tab
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', coc_opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], coc_opts)
-
+keyset("i", "<tab>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', coc_opts)
+keyset("i", "<s-tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], coc_opts)
 
