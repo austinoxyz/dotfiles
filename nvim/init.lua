@@ -12,4 +12,5 @@ require "austino.config.lualine"
 require "austino.config.nvim-tree"
 require "austino.config.fzf"
 require "austino.config.coc"
+require "austino.config.treesitter"
 

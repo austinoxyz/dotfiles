@@ -10,7 +10,7 @@ local options = {
     wrap		    = false, 	    -- don't wrap lines by default
     termguicolors	= true,
     guifont         = "iosevka:h10",
-    updatetime  	= 100, 		    -- faster updates
+    updatetime  	= 300, 		    -- faster updates
     hidden          = false, 	    -- no hidden buffers
     autoread        = true,         -- automatically read on change
     tabstop         = 4, 		    -- tabs are 4 spaces
@@ -23,7 +23,7 @@ local options = {
     undofile        = true, 	    -- enable persistent undo
     showmode        = false,
     timeout         = true,
-    timeoutlen      = 100,
+    timeoutlen      = 500,
 }
 
 for k, v in pairs(options) do

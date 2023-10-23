@@ -43,27 +43,19 @@ packer.init {
 -- Install your plugins here
 return packer.startup(function(use)
     use "wbthomason/packer.nvim"           -- packer manages itself
-
     use "morhetz/gruvbox"                  -- gruvbox colorscheme
-
-    use 'nvim-lualine/lualine.nvim'        -- slick statusbar
-
-    use "nvim-tree/nvim-web-devicons"      -- slick icons
+    use 'nvim-lualine/lualine.nvim'        -- statusbar
+    use "nvim-tree/nvim-web-devicons"      -- icons
     use "nvim-tree/nvim-tree.lua"          -- directory navigator
-
     use "puremourning/vimspector"          -- debugger
-
-    -- junegunn is amazing
     use "junegunn/fzf"                     -- fuzzy finder
     use "junegunn/fzf.vim"                 -- fuzzy finder
     use "junegunn/goyo.vim"                -- center text and remove distractions
-
     use 'norcalli/nvim-colorizer.lua'      -- highlight color codes
-
-    use { "neoclide/coc.nvim", branch = "release" } -- completion
-
+    use "tpope/vim-surround"               -- motions for manipulating symbols that surround text
+    use "tpope/vim-commentary"             -- motions for commenting out lines
+    use { "neoclide/coc.nvim", branch = "release" }              -- completion
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" } -- treesitter highlighting
-
     if PACKER_BOOTSTRAP then
       require("packer").sync()
     end
