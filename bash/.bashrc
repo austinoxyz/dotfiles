@@ -8,7 +8,7 @@ case $- in
       *) return;;
 esac
 
-# set variable identifying the chroot you work in (used in the prompt below)
+# set variable identifying the chroot you work in
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi

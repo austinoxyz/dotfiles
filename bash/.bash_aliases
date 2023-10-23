@@ -14,13 +14,24 @@ alias fix-xset='xset r rate 200 40 m 0 0'
 alias fx='xset r rate 200 40 m 0 0'
 
 # apply and unapply redshift to my monitors 
-alias apply-redshift="xrandr --output DP-0 --mode 1920x1080 --rate 60.00 --brightness 0.9 --gamma 0.9:0.9:0.9 --output DP-2 --right-of DP-0 --mode 1920x1080 --rate 1440.00 --brightness 0.9 --gamma 0.9:0.9:0.9 --crtc 1"
-alias unapply-redshift="xrandr --output DP-0 --mode 1920x1080 --rate 60.00 --brightness 1 --gamma 1:1:1 --output DP-2 --right-of DP-0 --mode 1920x1080 --rate 144.00 --brightness 1 --gamma 1:1:1 --crtc 1"
+alias apply-redshift="xrandr --output DP-0 --mode 1920x1080 --rate 60.00 --brightness 0.9 --gamma 0.9:0.9:0.9 --output DP-2 --left-of DP-0 --mode 1920x1080 --rate 1440.00 --brightness 0.9 --gamma 0.9:0.9:0.9 --crtc 1"
+alias unapply-redshift="xrandr --output DP-0 --mode 1920x1080 --rate 60.00 --brightness 1 --gamma 1:1:1 --output DP-2 --left-of DP-0 --mode 1920x1080 --rate 144.00 --brightness 1 --gamma 1:1:1 --crtc 1"
+
+alias setup-monitors="`cat ${SCRIPTS}/commands/setup-monitors.sh`"
 
 # create and edit a new shell script without having to manually adjust permissions
 # Usage: mksh [filename]
 mksh() { 
-    echo "#!/bin/sh" > $1 && chmod u+x $1 && nvim $1 
+    [ "$#" -gt 1 ] && echo "Invalid number of arguments." >&2 && return
+
+    filename=''
+    if [ "$#" -eq 1 ]; then  
+        filename="${1}"
+    else
+        filename="script.sh"
+    fi
+
+    printf "#!/bin/sh\n" > ${filename} && chmod u+x ${filename} && nvim ${filename} 
 }
 
 # quick startup function that creates a simple proj dir for c/c++ 
@@ -30,28 +41,64 @@ mkcprojdir() {
     [ "$#" -ne 2 ] && echo "Invalid number of arguments." >&2 && return
     [ -d "$1" ] && echo  "Directory already exists." >&2 && return
 
-    CC=''
-    template_fpath=''
-    case "$2" in
-        "c")   CC='gcc'; template_fpath="${XDG_TEMPLATES_HOME:-$HOME/Templates}/main.c"    ;;
-        "cpp") CC='g++'; template_fpath="${XDG_TEMPLATES_HOME:-$HOME/Templates}/main.cpp"  ;;
+    dirname="${1}"
+    ext="${2}"
+
+    compiler=''
+    case "${ext}" in
+        "c")   compiler='gcc' ;; 
+        "cpp") compiler='g++' ;; 
         *)     echo "Invalid filetype." >&2 && return ;;
     esac
 
+    template_fpath="${XDG_TEMPLATES_HOME:-$HOME/Templates}/main.${ext}"
     if [ ! -f "$template_fpath" ]; then echo "Template doesn't exist." >&2 && return; fi 
 
-    if ! mkdir "$1"; then echo "Failed to create directory."  >&2 && return; fi 
-    if ! cd "$1";    then echo "Failed to cd into directory." >&2 && return; fi
+    if ! mkdir -p "${dirname}"; then echo "Failed to create directory."  >&2 && return; fi 
+    if ! cd "${dirname}"; then echo "Failed to cd into directory." >&2 && return; fi
 
-    if ! cp "$template_fpath" "main.$2"; then echo "Failed to copy template" >&2 && return; fi
+    if ! cp "$template_fpath" "main.${ext}"; then echo "Failed to copy template" >&2 && return; fi
 
-    echo "$CC -o main main.$2 -Wall -Wextra -Werror" > build.sh && chmod u+x build.sh
+    echo "${compiler} -o main main.${ext} -Wall -Wextra -Werror" > build.sh && chmod u+x build.sh
 
-    nvim main.$2
+    nvim main.${ext}
 }
 
+# open a c/c++ header and implementation file in a vertically split neovim instance
+# Note: Will prefer to open .cpp/.hpp files over .c/.h files.
+# Usage: openctab [name]
+opensplit() {
+    if [ "$#" -gt 1 ] || [ "$#" -eq 0 ]; then 
+        echo "Invalid number of arguments." >&2 && return
+    fi
+
+    [ ! -d "include" ] && echo "'include/' directory doesn't exist." >&2 && return
+    [ ! -d "src" ] && echo "'src/' directory doesn't exist." >&2 && return
+
+    name="${1}"
+
+    c_header_file="include/${name}.h"
+    c_src_file="src/${name}.c"
+    cpp_header_file="include/${name}.hpp"
+    cpp_src_file="src/${name}.cpp"
+
+    header_file=${cpp_header_file}
+    [ ! -f "${header_file}" ] && header_file="${cpp_header_file}";
+
+    src_file=${cpp_src_file}
+    [ ! -f "${src_file}" ] && src_file="${cpp_src_file}";
+
+    if [ ! -f "${header_file}" -a ! -f ${src_file} ]; then 
+        echo "No files of this name exist." >&2 && return;
+    fi
+
+    nvim -O ${header_file} ${src_file}
+}
+alias osp="opensplit "
+
 # concat multiple files with filename section headers
-alias cat-w-fnames="tail -n +1 "
+alias cat-with-filenames="tail -n +1 "
+alias catwf="cat-with-filenames"
 
 # clear out a file
 # Usage: clrfile [name]
