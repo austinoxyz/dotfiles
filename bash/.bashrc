@@ -56,7 +56,8 @@ force_color_prompt=yes
 color_prompt=yes
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\[\033[31m\][\[\033[32m\]${debian_chroot:+($debian_chroot)}\u\[\033[33m\]\[\033[36m\]@\[\033[34m\]\h \[\033[35m\]\w\[\033[31m\]]\[\033[33m\]\$ \[\033[37m\]'; PROMPT_DIRTRIM=1
+    OLD_PS1='\[\033[31m\][\[\033[32m\]${debian_chroot:+($debian_chroot)}\u\[\033[33m\]\[\033[36m\]@\[\033[34m\]\h \[\033[35m\]\w\[\033[31m\]]\[\033[33m\]\$ \[\033[37m\]'; PROMPT_DIRTRIM=1
+    PS1='[\[\033[37m\]\t] \[\033[35m\]\W \[\033[32m\]\\$ \[\033[37m\]'
     PS2='\[\033[33m\] > \[\033[37m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
