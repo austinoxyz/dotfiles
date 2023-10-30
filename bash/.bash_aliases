@@ -14,10 +14,10 @@ alias fix-xset='xset r rate 200 40 m 0 0'
 alias fx='xset r rate 200 40 m 0 0'
 
 # apply and unapply redshift to my monitors 
-alias apply-redshift="xrandr --output DP-0 --mode 1920x1080 --rate 60.00 --brightness 0.9 --gamma 0.9:0.9:0.9 --output DP-2 --left-of DP-0 --mode 1920x1080 --rate 1440.00 --brightness 0.9 --gamma 0.9:0.9:0.9 --crtc 1"
+alias apply-redshift="xrandr --output DP-0 --mode 1920x1080 --rate 60.00 --brightness 0.9 --gamma 0.9:0.9:0.9 --output DP-2 --left-of DP-0 --mode 1920x1080 --rate 144.00 --brightness 0.9 --gamma 0.9:0.9:0.9 --crtc 1"
 alias unapply-redshift="xrandr --output DP-0 --mode 1920x1080 --rate 60.00 --brightness 1 --gamma 1:1:1 --output DP-2 --left-of DP-0 --mode 1920x1080 --rate 144.00 --brightness 1 --gamma 1:1:1 --crtc 1"
 
-alias setup-monitors="`cat ${SCRIPTS}/commands/setup-monitors.sh`"
+alias setup-monitors="`cat ${SCRIPTS}/setup-monitors.sh`"
 
 # create and edit a new shell script without having to manually adjust permissions
 # Usage: mksh [filename]
