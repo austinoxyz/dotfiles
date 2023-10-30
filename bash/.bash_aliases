@@ -1,23 +1,24 @@
 # austinoxyz/.bash_aliases
 
-# ============================================================================
 # Convenience
-
+# ----------------------------------------------------------
 alias la='ls -lAh'
 alias ll='ls -lh'
 
-# set random wallpaper
-alias rw='wal -i ${WALLPAPERS_DIR} -o ${WALSCRIPTS_DIR}/genzathurarc --saturate 0.85 -b "#323232" > /dev/null 2>&1'
+if [ ! -z "${UTILITY}" ] && [ -d "${UTILITY}" ]; then
+    alias fx="${UTILITY}/setup-peripherals.sh"
+    alias rw="${UTILITY}/random-wallpaper.sh"
+    alias setmon="${UTILITY}/setup-monitors.sh"
+    alias redon="${UTILITY}/redshift.sh on"
+    alias redon="${UTILITY}/redshift.sh off"
+fi
 
-# reset xset parameters
-alias fix-xset='xset r rate 200 40 m 0 0'
-alias fx='xset r rate 200 40 m 0 0'
+# specify history file when using `wget`
+alias wget="wget --hsts-file="$XDG_CACHE_HOME"/wget-hsts"
+# ----------------------------------------------------------
 
-# apply and unapply redshift to my monitors 
-alias apply-redshift="xrandr --output DP-0 --mode 1920x1080 --rate 60.00 --brightness 0.9 --gamma 0.9:0.9:0.9 --output DP-2 --left-of DP-0 --mode 1920x1080 --rate 144.00 --brightness 0.9 --gamma 0.9:0.9:0.9 --crtc 1"
-alias unapply-redshift="xrandr --output DP-0 --mode 1920x1080 --rate 60.00 --brightness 1 --gamma 1:1:1 --output DP-2 --left-of DP-0 --mode 1920x1080 --rate 144.00 --brightness 1 --gamma 1:1:1 --crtc 1"
-
-alias setup-monitors="`cat ${SCRIPTS}/setup-monitors.sh`"
+# "aliases"
+# ----------------------------------------------------------
 
 # create and edit a new shell script without having to manually adjust permissions
 # Usage: mksh [filename]
@@ -95,58 +96,36 @@ opensplit() {
     nvim -O ${header_file} ${src_file}
 }
 alias osp="opensplit "
+# ----------------------------------------------------------
 
-# concat multiple files with filename section headers
-alias cat-with-filenames="tail -n +1 "
-alias catwf="cat-with-filenames"
-
-# clear out a file
-# Usage: clrfile [name]
-clrfile() {
-    [ "$#" -ne 1 ] && echo "Invalid number of arguments." >&2 && return
-    [ ! -f "$1" ] && echo  "File doesn't exist." >&2 && return
-    echo -n > "$1"
-}
-
-# ============================================================================
 # Git
-
-# generate github deploy key
+# ----------------------------------------------------------
 alias gen-deploy-key="ssh-keygen -t ed25519 -C 'aodonnell2536.3@gmail.com'"
-
-# see changes since last commit
 alias diff-last-commit='git diff > diff.diff && nv diff.diff'
-
-# gap last commit and stage hunks
 alias gap='git add -p'
+# ----------------------------------------------------------
 
-# ============================================================================
-
-# change history file of wget
-alias wget="wget --hsts-file="$XDG_CACHE_HOME"/wget-hsts"
-
-# ============================================================================
 # Software
-
+# ----------------------------------------------------------
 alias xmrig='~/Applications/xmrig/xmrig -o us-west.minexmr.com:4444 -u 41ifEWnkJtRFfWuvpzX4s7VvgZPbgeGxEdX2KffiDZs74VtT4VRin765uPfEQpx9xuTCwzzZWWJ2f8Q6icedQinGQWQrws8 -k --coin monero --cpu-memory-pool=4 --log-file="~/logs/xmrig/xmrig.log"'
 alias vpn='sudo openvpn --config ~/.vpn/atlanta.ovpn'
 alias tor='cd $HOME/Software/tor-browser;./Browser/start-tor-browser.desktop'
 alias nv='PATH=$PATH:$HOME/.config/nvim/lua/austino nvim'
 alias btc='$HOME/Software/Electrum-4.3.3/run_electrum & disown'
 alias zig='$HOME/Software/zig-linux-x86_64-0.11.0-dev.3664+0f5aff344/zig'
+# ----------------------------------------------------------
 
-# ============================================================================
 # Games   
-
+# ----------------------------------------------------------
 alias doom='${HOME}/Games/GZDoom/gzdoom/build/gzdoom'
 alias quake="quakespasm -basedir ${HOME}/Games/Quake/"
+# ----------------------------------------------------------
 
-# ============================================================================
 # MacOS :^)
-
+# ----------------------------------------------------------
 # clean up stupid '._*' files that MacOS leaves around
 alias dot_clean="find . -type f -name '._*' -delete"
-
 # clean up swap files that MacOS leaves in the working directory (for some reason)
 alias swp_clean="find . -type f -name '.*.swp' -delete"
+# ----------------------------------------------------------
 
