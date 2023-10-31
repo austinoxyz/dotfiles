@@ -135,13 +135,13 @@ mode "resize" {
 # Applications
 # ----------------------------------------------------------
 bindsym $mod+0 exec --no-startup-id dmenu_run -i -m 2 -p "launch:" -fn "iosevka-11"
-bindsym $mod+d exec --no-startup-id quicklaunch
-bindsym $mod+s exec --no-startup-id launch_search
-bindsym $mod+x exec --no-startup-id launch_cmd
+bindsym $mod+d exec --no-startup-id quicklaunch.sh
+bindsym $mod+s exec --no-startup-id launch-search.sh
+bindsym $mod+x exec --no-startup-id launch-cmd.sh
 
-bindsym $mod+Shift+o exec --no-startup-id launch_bookmark
-bindsym $mod+b exec --no-startup-id quicklaunch_bookmark
-bindsym $mod+Shift+b exec --no-startup-id add_bookmark
+bindsym $mod+Shift+o exec --no-startup-id launch-bookmark.sh
+bindsym $mod+b exec --no-startup-id quicklaunch-bookmark.sh
+bindsym $mod+Shift+b exec --no-startup-id add-bookmark.sh
 
 bindsym $mod+Shift+n exec --no-startup-id $TERMINAL -e 'nvim'
 bindsym $mod+Shift+f exec --no-startup-id firefox
