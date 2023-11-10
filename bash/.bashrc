@@ -25,7 +25,7 @@ FYEL="\[\033[33m\]" # foreground yellow
 FBLE="\[\033[34m\]" # foreground blue
 FMAG="\[\033[35m\]" # foreground magenta
 FCYN="\[\033[36m\]" # foreground cyan
-FWHT="\[\033[37m\]" # foreground white
+FWHT="\[\033[97m\]" # foreground white
 BBLK="\[\033[40m\]" # background black
 BRED="\[\033[41m\]" # background red
 BGRN="\[\033[42m\]" # background green
@@ -56,8 +56,8 @@ force_color_prompt=yes
 color_prompt=yes
 
 if [ "$color_prompt" = yes ]; then
-    OLD_PS1='\[\033[31m\][\[\033[32m\]${debian_chroot:+($debian_chroot)}\u\[\033[33m\]\[\033[36m\]@\[\033[34m\]\h \[\033[35m\]\w\[\033[31m\]]\[\033[33m\]\$ \[\033[37m\]'; PROMPT_DIRTRIM=1
-    PS1='[\[\033[37m\]\t] \[\033[35m\]\W \[\033[32m\]\\$ \[\033[37m\]'
+#    OLD_PS1='\[\033[31m\][\[\033[32m\]${debian_chroot:+($debian_chroot)}\u\[\033[33m\]\[\033[36m\]@\[\033[34m\]\h \[\033[35m\]\w\[\033[31m\]]\[\033[33m\]\$ \[\033[37m\]'; PROMPT_DIRTRIM=1
+    PS1='[\[\033[97m\]\t] \[\033[31m\]\W \[\033[33m\]\\$ \[\033[97m\]'
     PS2='\[\033[33m\] > \[\033[37m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -79,7 +79,7 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # allow all new terminals to be colored by wal
-cat ~/.cache/wal/sequences
+# cat ~/.cache/wal/sequences
 
 # ============================================================================
 # Load Environment Variables

@@ -101,7 +101,7 @@ alias osp="opensplit "
 # Git
 # ----------------------------------------------------------
 alias gen-deploy-key="ssh-keygen -t ed25519 -C 'aodonnell2536.3@gmail.com'"
-alias diff-last-commit='git diff > diff.diff && nv diff.diff'
+alias diff-last-commit='git diff >diff.diff && nv diff.diff'
 alias gap='git add -p'
 # ----------------------------------------------------------
 
