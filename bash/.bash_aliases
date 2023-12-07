@@ -4,6 +4,7 @@
 # ----------------------------------------------------------
 alias la='ls -lAh'
 alias ll='ls -lh'
+alias :q='exit'
 
 if [ ! -z "${UTILITY}" ] && [ -d "${UTILITY}" ]; then
     alias fx="${UTILITY}/setup-peripherals.sh"
@@ -119,6 +120,7 @@ alias zig='$HOME/Software/zig-linux-x86_64-0.11.0-dev.3664+0f5aff344/zig'
 # ----------------------------------------------------------
 alias doom='${HOME}/Games/GZDoom/gzdoom/build/gzdoom'
 alias quake="quakespasm -basedir ${HOME}/Games/Quake/"
+alias zork="cd ${HOME}/Games/Zork1 && dosbox ${HOME}/Games/Zork1/zork1.bat -exit"
 # ----------------------------------------------------------
 
 # MacOS :^)
