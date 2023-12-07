@@ -19,6 +19,7 @@ set $ws5 "5"
 # monitors
 exec --no-startup-id /usr/bin/sh setup-monitors.sh
 force_xinerama yes
+
 # audio control with volume keys on top row (F10, F11, F12 w/o Fn modifier)
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
@@ -40,35 +41,39 @@ for_window [class="^qBittorrent"] floating enable
 
 # Essential keybinds and window behavior
 # ----------------------------------------------------------
+
+# poweroff
+bindsym $mod+Shift+Control+End exec "poweroff"
+
 # reload the config
-bindsym $mod+Shift+c reload
+bindsym $mod+Next reload
 
 # restart i3 inplace (preserves layout/session)
-bindsym $mod+Shift+r restart
+bindsym $mod+Home restart
 
 # exit i3 (logs out of X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Alt+$left focus output 
+bindsym $mod+End exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Shift+Return exec $TERMINAL
+bindsym $mod+Return exec $TERMINAL
 
 # kill focused window
-bindsym $mod+Shift+q kill
+# key: Shift+]
+bindsym $mod+Shift+0x5d kill
 
 # change focus
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
+bindsym $mod+$left  focus left
+bindsym $mod+$down  focus down
+bindsym $mod+$up    focus up
 bindsym $mod+$right focus right
 
 # move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$left  move left
+bindsym $mod+Shift+$down  move down
+bindsym $mod+Shift+$up    move up
 bindsym $mod+Shift+$right move right
 
 # split in horizontal or vertical orientation
@@ -84,10 +89,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+Insert floating toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -111,6 +113,8 @@ bindsym $mod+Shift+2 move container to workspace number $ws2; workspace number $
 bindsym $mod+Shift+3 move container to workspace number $ws3; workspace number $ws3
 bindsym $mod+Shift+4 move container to workspace number $ws4; workspace number $ws4
 bindsym $mod+Shift+5 move container to workspace number $ws5; workspace number $ws5
+
+bindsym $mod+Alt+$left focus output 
 # ----------------------------------------------------------
 
 # Window resizing
@@ -134,25 +138,25 @@ mode "resize" {
 
 # Applications
 # ----------------------------------------------------------
-bindsym $mod+0 exec --no-startup-id dmenu_run -i -m 2 -p "launch:" -fn "iosevka-11"
-bindsym $mod+d exec --no-startup-id quicklaunch.sh
-bindsym $mod+s exec --no-startup-id launch-search.sh
-bindsym $mod+x exec --no-startup-id launch-cmd.sh
-
-bindsym $mod+Shift+o exec --no-startup-id launch-bookmark.sh
-bindsym $mod+b exec --no-startup-id quicklaunch-bookmark.sh
-bindsym $mod+Shift+b exec --no-startup-id add-bookmark.sh
-
-bindsym $mod+Shift+n exec --no-startup-id $TERMINAL -e 'nvim'
+bindsym $mod+d       exec --no-startup-id dmenu_run -i -m 2 -p "launch:" -fn "iosevka-11"
+bindsym $mod+space   exec --no-startup-id quicklaunch.sh
+bindsym $mod+s       exec --no-startup-id launch-search.sh
+bindsym $mod+x       exec --no-startup-id launch-cmd.sh
 bindsym $mod+Shift+f exec --no-startup-id firefox
 bindsym $mod+Shift+p exec --no-startup-id keepassxc
 bindsym $mod+Shift+g exec --no-startup-id gimp
-bindsym $mod+Shift+t exec --no-startup-id $TERMINAL -e 'chatgpt'
 bindsym $mod+Shift+v exec --no-startup-id virt-manager
-
 bindsym $mod+Shift+m exec --no-startup-id firefox -new-window "https://gmail.com"              
+bindsym $mod+Shift+c exec --no-startup-id $TERMINAL -e 'chatgpt'
+bindsym $mod+Shift+n exec --no-startup-id $TERMINAL -e 'nvim'
+bindsym $mod+Prior   exec --no-startup-id "random-wallpaper.sh notify"
+# ----------------------------------------------------------
 
-bindsym $mod+Prior exec --no-startup-id "random-wallpaper.sh notify"
+# Bookmarks
+# ----------------------------------------------------------
+bindsym $mod+b       exec --no-startup-id quicklaunch-bookmark.sh
+bindsym $mod+Shift+o exec --no-startup-id launch-bookmark.sh
+bindsym $mod+Shift+b exec --no-startup-id add-bookmark.sh
 # ----------------------------------------------------------
 
 # i3bar
@@ -171,7 +175,7 @@ bar {
     colors {
         background #121212
         statusline #d8dee9
-        separator #969696
+        separator  #969696
     }
 }
 # ----------------------------------------------------------

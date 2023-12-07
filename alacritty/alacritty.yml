@@ -10,40 +10,40 @@ colors:
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
-    text: '0x282828'
-    cursor: '0xd5c4a1'
+    text:       '0x282828'
+    cursor:     '0xd5c4a1'
 
   # Normal colors
   normal:
-    black:   '0x282828'
-    red:     '0xfb4934'
-    green:   '0xb8bb26'
-    yellow:  '0xfabd2f'
-    blue:    '0x83a598'
-    magenta: '0xd3869b'
-    cyan:    '0x8ec07c'
-    white:   '0xffffff'
+    black:      '0x282828'
+    red:        '0xfb4934'
+    green:      '0xb8bb26'
+    yellow:     '0xfabd2f'
+    blue:       '0x83a598'
+    magenta:    '0xd3869b'
+    cyan:       '0x8ec07c'
+    white:      '0xffffff'
 
   # Bright colors
   bright:
-    black:   '0x665c54'
-    red:     '0xfb4934'
-    green:   '0xb8bb26'
-    yellow:  '0xfabd2f'
-    blue:    '0x83a598'
-    magenta: '0xd3869b'
-    cyan:    '0x8ec07c'
-    white:   '0xffffff'
+    black:      '0x665c54'
+    red:        '0xfb4934'
+    green:      '0xb8bb26'
+    yellow:     '0xfabd2f'
+    blue:       '0x83a598'
+    magenta:    '0xd3869b'
+    cyan:       '0x8ec07c'
+    white:      '0xffffff'
 
   dim:
-    black: '#373e4d'
-    red: '#94545d'
-    green: '#809575'
-    yellow: '#b29e75'
-    blue: '#68809a'
-    magenta: '#8c738c'
-    cyan: '#6d96a5'
-    white: '#aeb3bb'
+    black:      '#373e4d'
+    red:        '#94545d'
+    green:      '#809575'
+    yellow:     '#b29e75'
+    blue:       '#68809a'
+    magenta:    '#8c738c'
+    cyan:       '#6d96a5'
+    white:      '#aeb3bb'
 
   indexed_colors:
     - { index: 16, color: '0xffffff' }
@@ -94,7 +94,7 @@ key_bindings:
   - { key: Key0, mods: Control, action: ResetFontSize }
   - { key: Equals, mods: Control, action: IncreaseFontSize }
   - { key: Minus, mods: Control, action: DecreaseFontSize }
-  - { key: Return, mods: Super, action: SpawnNewInstance }
+  - { key: 40, mods: Super, action: SpawnNewInstance } # key: '\''
 
 mouse:
     hide_when_typing: true

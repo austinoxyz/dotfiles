@@ -33,10 +33,6 @@ interval=5
 min_width=99%
 align=center
 
-[vpn]
-command=$I3SCRIPTS/i3vpn
-interval=30
-
 [date]
 command=$I3SCRIPTS/i3date
 interval=3600
@@ -54,6 +50,10 @@ command=$I3SCRIPTS/i3packages
 interval=3600
 min_width=📦99
 align=center
+
+[vpn]
+command=$I3SCRIPTS/i3vpn
+interval=30
 
 [net]
 command=$I3SCRIPTS/i3net
