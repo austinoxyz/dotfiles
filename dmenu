@@ -1,0 +1,6 @@
+#!/bin/sh
+font="iosevka-12"
+sel_bkg_col="#720000"
+sel_fg_col="#c9af04"
+border_width=3
+monitor=3
