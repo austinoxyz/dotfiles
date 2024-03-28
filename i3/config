@@ -37,15 +37,22 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # Window decorations
 # ----------------------------------------------------------
-# remove title from windows
-#for_window [class="^.*"] border pixel 2
-default_border pixel 1
-default_floating_border pixel 1
-hide_edge_borders vertical
-font pango:monospace 0
-# start specified applications floating
+# start certain applications floating
 for_window [class="^GNU Image Manipulation Program$"] floating enable
 for_window [class="^qBittorrent"] floating enable
+
+# remove title from windows
+#for_window [class="^.*"] border pixel 2
+#default_border pixel 1
+#default_floating_border pixel 1
+#font pango:monospace 0
+#hide_edge_borders vertical
+
+# centered/small-text window title
+default_border pixel 2
+hide_edge_borders none
+title_align center
+font pango:monospace 8
 # ----------------------------------------------------------
 
 # Essential keybinds and window behavior
