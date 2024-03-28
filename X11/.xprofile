@@ -1,0 +1,28 @@
+
+# random wallpaper and matching colorscheme
+if [ -e "${UTILITY}/random-wallpaper.sh" ]; then
+    "${UTILITY}/random-wallpaper.sh"
+elif [ -d $"{WALLPAPERS_DIR}" ]; then
+    wal -i ${WALLPAPERS_DIR} --saturate 0.85 -b "#323232"
+fi
+
+# better peripherals settings
+if [ -e "${UTILITY}/setup-peripherals.sh" ]; then
+    "${UTILITY}/setup-peripherals.sh"
+else
+    xset r rate 200 40 m 0 0
+fi
+
+# monitor setup
+if [ -e "${UTILITY}/setup-monitors.sh" ]; then
+    "${UTILITY}/setup-monitors.sh"
+else
+    xrandr --output DP-3 --primary --left-of DP-2 --mode 1920x1080 --rate 144.00 --brightness 1 --gamma 1:1:1 --output DP-2 --mode 1920x1080 --rate 60.00 --brightness 1 --gamma 1:1:1 --crtc 1
+fi
+
+# swap caps and escape
+if [ -e "${UTILITY}/swap-esc-capslock.sh" ]; then
+    ${UTILITY}/swap-esc-capslock.sh
+else
+    setxkbmap -option caps:swapescape
+fi
