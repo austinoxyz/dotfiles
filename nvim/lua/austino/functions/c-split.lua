@@ -1,9 +1,9 @@
- -- lua/austino/functions.lua
+-- lua/austino/functions.lua
 
 local create_command = vim.api.nvim_create_user_command
 local get_cwd = vim.loop.cwd
 
-function ArrayConcat(a1, a2)
+function ListConcat(a1, a2)
     if a1 == nil and a2 == nil then return nil
     elseif a1 == nil then return a2
     elseif a2 == nil then return a1
@@ -15,7 +15,7 @@ function ArrayConcat(a1, a2)
     return a1
 end
 
-function ArrayContains(a, val)
+function ListContains(a, val)
     if a == nil then return false end
     for i=1, #a do
         if a[i] == val then
@@ -25,7 +25,7 @@ function ArrayContains(a, val)
     return false
 end
 
-function ArrayIntersect(a1, a2)
+function ListIntersect(a1, a2)
     if a1 == nil and a2 == nil then return nil
     elseif a1 == nil then return a2
     elseif a2 == nil then return a1
@@ -39,20 +39,20 @@ function ArrayIntersect(a1, a2)
         a2 = tmp
     end
     for i=1, #a1 do
-        if ArrayContains(a2, a1[i]) then
+        if ListContains(a2, a1[i]) then
             _res[k] = a1[i]
         end
     end
     return _res
 end
 
-function ArrayPrint(a)
+function ListPrint(a)
     for i=1,#a do
         print(a[i])
     end
 end
 
-function ArrayJoin(a1, a2)
+function ListJoin(a1, a2)
     if a1 == nil and a2 == nil then return nil
     elseif a1 == nil then return a2
     elseif a2 == nil then return a1
@@ -63,14 +63,14 @@ function ArrayJoin(a1, a2)
         res[i] = a1[i]
     end
     for i=1, #a2 do
-        if not ArrayContains(res, a2[i]) then
+        if not ListContains(res, a2[i]) then
             res[#res+1] = a2[i]
         end
     end
     return res
 end
 
-function ArrayMap(a, f)
+function ListMap(a, f)
     if a == nil then return nil end
     local res = {}
     for i=1, #a do
@@ -81,7 +81,7 @@ function ArrayMap(a, f)
     return res
 end
 
-function ArrayFilter(a, f)
+function ListFilter(a, f)
     local res = {}
     for i=1, #a do
         if f(a[i]) == true then
@@ -109,15 +109,62 @@ function StripFileExt(fname)
     return string.sub(fname, 0, pos-1)
 end
 
+function FileExists(name)
+   local f = io.open(name, "r")
+   return f ~= nil and io.close(f)
+end
+
+function FindFileExtension(basename, candidates)
+    for i, ext in pairs(candidates) do
+        if FileExists(basename .. "." .. ext) then
+            return ext
+        end
+    end
+    return nil
+end
+
+_G.cpp_file_extensions = { header={"h","hpp","hh"}, source={"c","cpp","cc"} }
+
+-- For C/C++ projects, open a header/source file in a tabnew vsplit, 
+-- or just one in a tabnew if only one exists. 
+--
+-- The function assumes that headers are located in `./include/` 
+-- and sources are located in `./src/`.
+--
+-- Will match on any of ("h","hpp","hh") and ("c","cpp","cc") as 
+-- file extensions for the argument passed.
+--
+--
+--
+-- Usage - :OpenCSplit filename-base
+--       - :OpenCSplit path/to/filename-base
+--
+--  FIXME: Allow for multiple arguments to open multiple tabs
 create_command('OpenCSplit',
     function(opts)
-        print("we are here 1")
-        print(get_cwd())
+        if #opts.fargs == 0 then
+            return
+        end
+
+        for i, basename in pairs(opts.fargs) do
+            local header_ext = FindFileExtension("include/"..basename, _G.cpp_file_extensions.header)
+            local src_ext = FindFileExtension("src/"..basename, _G.cpp_file_extensions.source)
+
+            local command = nil
+            if header_ext == nil and src_ext == nil then
+                return
+            elseif header_ext == nil then
+                vim.cmd(string.format("tabnew src/%s.%s", basename, src_ext))
+            elseif src_ext == nil then
+                vim.cmd(string.format("tabnew include/%s.%s", basename, header_ext))
+            else
+                vim.cmd(string.format("tabnew include/%s.%s | vsplit src/%s.%s", basename, header_ext, basename, src_ext))
+            end
+        end
     end, { 
-        nargs=1, -- this can later be '+' to open multiple tabs of splits at once
+        nargs='+',
         complete = function(ArgLead, CmdLine, CursorPos)
             function listfiles(dirname)
-                print("we are here 2")
                 local i = 0
                 local filenames = {}
                 local pfile = io.popen('ls -a "'..dirname..'"')
@@ -136,19 +183,21 @@ create_command('OpenCSplit',
             local slash_pos = rfind(ArgLead, "/")
             local suffix = ""
             local so_far = ArgLead
+
             if slash_pos ~= nil then
                  suffix = ArgLead:sub(1, slash_pos)
-                 so_far = ArgLead:sub(slash_pos, (#ArgLead-slash_pos))
-                 print("ArgLead="..ArgLead)
-                 print("#ArgLead="..tostring(#ArgLead))
-                 print("slash_pos="..tostring(slash_pos))
+                 so_far = ArgLead:sub(slash_pos+1)
             end
+
+            -- print("ArgLead = '"..ArgLead.."'")
+            -- print("suffix  = '"..suffix.."'")
+            -- print("so_far  = '"..so_far.."'")
 
             header_dir = dirname.."/include/"..suffix
             src_dir = dirname.."/src/"..suffix
 
-            print(header_dir)
-            print(src_dir)
+            -- print(header_dir)
+            -- print(src_dir)
 
             header_files = listfiles(header_dir)
             src_files = listfiles(src_dir)
@@ -162,9 +211,9 @@ create_command('OpenCSplit',
 
             function prepend_dir_prefix(fname) return prefix..fname end
 
-            local map = ArrayMap
-            local join = ArrayJoin
-            local filter = ArrayFilter
+            local map = ListMap
+            local join = ListJoin
+            local filter = ListFilter
 
             return map(
                 join(

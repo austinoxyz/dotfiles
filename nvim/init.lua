@@ -5,7 +5,6 @@ require "austino.keymaps"
 require "austino.plugins"
 require "austino.colorscheme"
 require "austino.spellcheck"
-require "austino.functions"
 require "austino.aliases"
 require "austino.autocmds"
 
@@ -15,3 +14,4 @@ require "austino.config.fzf"
 require "austino.config.coc"
 require "austino.config.treesitter"
 
+require "austino.functions.c-split"
