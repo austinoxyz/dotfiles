@@ -70,7 +70,7 @@ blinking = "Never"
 TERM = "xterm-256color"
 
 [font]
-size = 10.0
+size = 14.0
 
 [font.bold]
 family = "iosevka term extended"
