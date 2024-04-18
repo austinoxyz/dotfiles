@@ -1,12 +1,14 @@
 # ~/.config/i3/config
 
-# Essential variables
+# Global variables
 # ----------------------------------------------------------
 set $mod Mod4
-set $up k
-set $down j
-set $left h
+
+set $up    k
+set $down  j
+set $left  h
 set $right l
+
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -14,9 +16,6 @@ set $ws4 "4"
 set $ws5 "5"
 
 set $TERM alacritty
-
-set $gapsize 10
-#set $gapsize 0
 # ----------------------------------------------------------
 
 # Initialization
@@ -25,10 +24,9 @@ set $gapsize 10
 force_xinerama yes
 
 # audio control with volume keys on top row (F10, F11, F12 w/o Fn modifier)
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
@@ -42,11 +40,11 @@ for_window [class="^GNU Image Manipulation Program$"] floating enable
 for_window [class="^qBittorrent"] floating enable
 
 # remove title from windows
-#for_window [class="^.*"] border pixel 2
-#default_border pixel 1
-#default_floating_border pixel 1
-#font pango:monospace 0
-#hide_edge_borders vertical
+# for_window [class="^.*"] border pixel 2
+# default_border pixel 1
+# default_floating_border pixel 1
+# font pango:monospace 0
+# hide_edge_borders vertical
 
 # centered/small-text window title
 default_border pixel 2
@@ -58,7 +56,10 @@ font pango:monospace 8
 # Essential keybinds and window behavior
 # ----------------------------------------------------------
 # poweroff
-bindsym $mod+Shift+Control+End exec "poweroff"
+bindsym $mod+Shift+Control+End exec poweroff
+
+# reboot
+bindsym $mod+Shift+Control+Home exec reboot
 
 # reload the config
 bindsym $mod+Next reload
@@ -76,7 +77,7 @@ floating_modifier $mod
 bindsym $mod+Return exec $TERM
 
 # kill focused window
-# key: Shift+]
+# 0x5d = key ']' ($mod+Shift+])
 bindsym $mod+Shift+0x5d kill
 
 # change focus
@@ -156,9 +157,10 @@ mode "resize" {
 
 # Gaps
 # ----------------------------------------------------------
+set $gapsize 10
 gaps inner $gapsize
 gaps outer $gapsize
-#smart_gaps on
+# smart_gaps on
 # ----------------------------------------------------------
 
 # Applications
@@ -184,6 +186,11 @@ bindsym $mod+Prior   exec --no-startup-id "random-wallpaper.sh notify"
 bindsym $mod+b       exec --no-startup-id quicklaunch-bookmark.sh
 bindsym $mod+Shift+o exec --no-startup-id launch-bookmark.sh
 bindsym $mod+Shift+b exec --no-startup-id add-bookmark.sh
+# ----------------------------------------------------------
+
+# Convenience
+# ----------------------------------------------------------
+bindsym $mod+Control+Next exec --no-startup-id "~/Scripts/utiility/config-keyboard.sh"
 # ----------------------------------------------------------
 
 # i3bar

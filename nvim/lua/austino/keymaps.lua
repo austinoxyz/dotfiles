@@ -1,13 +1,8 @@
 -- lua/austino/keymaps.lua
 
--- Modes
-  -- normal_mode = "n",
-  -- insert_mode = "i",
-  -- visual_mode = "v",
-  -- visual_block_mode = "x",
-  -- term_mode = "t",
-  -- command_mode = "c",
 
+-- Globals
+-----------------------------------------------------------
 local opts = { noremap = true, silent = true }
 local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 local noremap_only = { noremap = true }
@@ -19,7 +14,10 @@ local keyset = vim.keymap.set
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+-----------------------------------------------------------
 
+-- General Convenience
+-----------------------------------------------------------
 -- remap C-c to <esc>
 keymap("n", "<c-c>", "<esc>", opts)
 keymap("i", "<c-c>", "<esc>", opts)
@@ -28,9 +26,6 @@ keymap("o", "<c-c>", "<esc>", opts)
 
 -- exit terminal with esc
 keymap("t", "<Esc>", "<C-\\><C-n>", opts)
-
-
-
 
 -- hide highlighting from last search until next search
 keymap("n", "<m-/>", ":noh<cr>", opts)
@@ -51,10 +46,10 @@ keymap("v", "<c-c>", ":'<,'>w !xclip -i -sel c<cr><cr>", opts)
 
 -- hide highlighting from last search until next search
 keymap("n", "<m-/>", ":noh<cr>", opts)
+-----------------------------------------------------------
 
-
-
-
+-- Window/Tab/Buffer/Cursor Management/Navigation
+-----------------------------------------------------------
 -- open and close tabs
 keymap("n", "<m-i>", ":tabnew ", noremap_only)
 keymap("n", "<m-y>", ":tabclose<cr>", opts)
@@ -96,7 +91,10 @@ keymap("n", "<Left>",  "<c-w>h", opts)
 keymap("n", "<Right>", "<c-w>l", opts)
 keymap("n", "<Up>",    "<c-w>k", opts)
 keymap("n", "<Down>",  "<c-w>j", opts)
+-----------------------------------------------------------
 
+-- Project Management/Navigation
+-----------------------------------------------------------
 -- For C/C++ projects, open a header/source file in a tabnew vsplit, 
 -- or just one in a tabnew if only one exists. 
 --
@@ -116,35 +114,19 @@ keymap("n", "<m-\\>", ":make clean all<cr>", noremap_only)
 -- navigate ctags
 keymap("n", "<m-]>", "<c-]>", opts)
 keymap("n", "<m-[>", "<c-t>", opts)
+-----------------------------------------------------------
 
-
-
-
--- edit vimrc, vertically or horizontally if desired
-keymap("n", "<leader>`e", ":e   $MYVIMRC<cr>", opts)
-keymap("n", "<leader>`v", ":vsp $MYVIMRC<cr>", opts)
-keymap("n", "<leader>`h", ":sp  $MYVIMRC<cr>", opts)
--- edit current .vimspector.json, vertically or horizontally if desired
-keymap("n", "<leader>1e", ":e   ./.vimspector.json<cr>", opts)
-keymap("n", "<leader>1v", ":vsp ./.vimspector.json<cr>", opts)
-keymap("n", "<leader>1h", ":sp  ./.vimspector.json<cr>", opts)
--- edit current Makefile, vertically or horizontally if desired
-keymap("n", "<leader>2e", ":e   Makefile<cr>", opts)
-keymap("n", "<leader>2v", ":vsp Makefile<cr>", opts)
-keymap("n", "<leader>2h", ":sp  Makefile<cr>", opts)
--- edit current README.md, vertically or horizontally if desired
-keymap("n", "<leader>3e", ":e   README.md<cr>", opts)
-keymap("n", "<leader>3v", ":vsp README.md<cr>", opts)
-keymap("n", "<leader>3h", ":sp  README.md<cr>", opts)
-
--- "applications"
+-- "Applications"
+-----------------------------------------------------------
 keymap("n", "<leader>h", ":FZF<cr>", opts)
 keymap("n", "<leader>f", ":Files<cr>", opts)
 keymap("n", "<leader>t", ":Tags<cr>", opts)
 keymap("n", "<leader>r", ":Rg<cr>", opts)
 keymap("n", "<leader>n", ":NvimTreeOpen<cr>", opts)
+-----------------------------------------------------------
 
--- vimspector keymappings
+-- vimspector
+-----------------------------------------------------------
 --keymap("n", "<m-p>", ":call vimspector#Pause()<cr>", opts)
 keymap("n", "<m-q>", ":call vimspector#Reset()<cr>", opts)
 keymap("n", "<m-w>", ":call vimspector#Launch()<cr>", opts)
@@ -159,13 +141,35 @@ keymap("n", "<m-d>", ":call vimspector#StepOut()<cr>", opts)
 keymap("n", "<m-r>", ":call vimspector#UpFrame()<cr>", opts)
 keymap("n", "<m-f>", ":call vimspector#DownFrame()<cr>", opts)
 
-
-
--- coc keymaps
+-- coc.nvim
+-----------------------------------------------------------
 local keyset = vim.keymap.set
 local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 -- completion with Tab and Shift+Tab
 keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', coc_opts)
 keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], coc_opts)
+-----------------------------------------------------------
 
+-- Convenience keybinds for certain files, 
+-- either global or an instance in the cwd
+-----------------------------------------------------------
+local set_file_open_keybind = function(leader_for_keybind, filename)
+    keymap("n","<leader>"..leader_for_keybind.."e",":tabnew "..filename.."<cr>",opts)
+end
+
+set_file_open_keybind("`", "./Makefile")
+set_file_open_keybind("1", "./README.md")
+set_file_open_keybind("v", "./.vimspector.json")
+-----------------------------------------------------------
+
+-- NOTES
+-----------------------------------------------------------
+-- Modes
+  -- normal_mode = "n",
+  -- insert_mode = "i",
+  -- visual_mode = "v",
+  -- visual_block_mode = "x",
+  -- term_mode = "t",
+  -- command_mode = "c",
+-----------------------------------------------------------
 

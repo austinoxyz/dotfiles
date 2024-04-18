@@ -2,7 +2,7 @@
 
 # Convenience
 # ----------------------------------------------------------
-alias la='ls -lAh'
+alias la='ls -lAht --time-style=iso'
 alias ll='ls -lh'
 
 alias +x='chmod u+x'
@@ -22,6 +22,9 @@ alias wget="wget --hsts-file="$XDG_CACHE_HOME"/wget-hsts"
 
 # clear nvim swap
 alias clear-nvim-swap="rm -f ${XDG_STATE_HOME:-${HOME}/.local/state}/nvim/swap/%*"
+
+# fast and clean make
+alias mc="make clean && make -j8"
 # ----------------------------------------------------------
 
 # Utility functions

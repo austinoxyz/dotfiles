@@ -1,4 +1,4 @@
- -- lua/austino/plugins.lua
+-- lua/austino/plugins.lua
 
 local fn = vim.fn
 
@@ -42,6 +42,7 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
+    -- plugins
     use "wbthomason/packer.nvim"           -- packer manages itself
     use "morhetz/gruvbox"                  -- colorscheme
     use "Mofiqul/dracula.nvim"             -- colorscheme
@@ -58,6 +59,11 @@ return packer.startup(function(use)
     use { "mg979/vim-visual-multi", branch="master" }          -- multiple cursors
     use { "neoclide/coc.nvim",      branch="release" }         -- symbol completion
     use { "nvim-treesitter/nvim-treesitter", run=":TSUpdate" } -- treesitter highlighting
+
+    -- luarocks
+    use_rocks 'luaposix'
+
+    -- bootstrap
     if PACKER_BOOTSTRAP then
       require("packer").sync()
     end

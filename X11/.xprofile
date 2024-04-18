@@ -7,10 +7,11 @@ elif [ -d $"{WALLPAPERS_DIR}" ]; then
 fi
 
 # better peripherals settings
-if [ -e "${UTILITY}/setup-peripherals.sh" ]; then
-    "${UTILITY}/setup-peripherals.sh"
+if [ -e "${UTILITY}/config-keyboard.sh" ]; then
+    "${UTILITY}/config-keyboard.sh"
 else
     xset r rate 200 40 m 0 0
+    setxkbmap -option caps:swapescape
 fi
 
 # monitor setup
