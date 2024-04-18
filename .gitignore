@@ -1,27 +1,27 @@
-	simple-chat/
-	.env
+simple-chat/
+.env
 
-	Epic/
-	GIMP/
-	GottCode/
-	QtProject.conf
-	cef_user_data/
-	coc/
-	dconf/
-	discord/
-	git/
-	gtk-2.0/
-	gzdoom/
-	htop/
-	kdenliverc
-	keepassxc/
-	mimeapps.list
-	neofetch/
-	pulse/
-	qBittorrent/
-	redshift/
-	systemd/
-	unity3d/
-	user-dirs.dirs
-	user-dirs.locale
-	vlc/
+Epic/
+GIMP/
+GottCode/
+QtProject.conf
+cef_user_data/
+coc/
+dconf/
+discord/
+git/
+gtk-2.0/
+gzdoom/
+htop/
+kdenliverc
+keepassxc/
+mimeapps.list
+neofetch/
+pulse/
+qBittorrent/
+redshift/
+systemd/
+unity3d/
+user-dirs.dirs
+user-dirs.locale
+vlc/
