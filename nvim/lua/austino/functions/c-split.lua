@@ -132,8 +132,7 @@ create_command('OpenCSplit',
 create_command('NewCSplit',
     function(opts) 
         if #opts.fargs == 0 then return end
-
-
+        -- TODO(austin): unimplemented
     end, 
     {
         nargs='+'

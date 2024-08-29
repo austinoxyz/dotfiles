@@ -24,7 +24,7 @@ alias wget="wget --hsts-file="$XDG_CACHE_HOME"/wget-hsts"
 alias clear-nvim-swap="rm -f ${XDG_STATE_HOME:-${HOME}/.local/state}/nvim/swap/%*"
 
 # fast and clean make
-alias mc="make clean && make -j8"
+alias mc="clear && make clean && make -j8"
 # ----------------------------------------------------------
 
 # Utility functions
@@ -134,6 +134,7 @@ alias tor='cd $HOME/Software/tor-browser;./Browser/start-tor-browser.desktop'
 alias nv='PATH=$PATH:$HOME/.config/nvim/lua/austino nvim'
 alias btc='$HOME/Software/Electrum-4.3.3/run_electrum & disown'
 alias zig='$HOME/Software/zig-linux-x86_64-0.11.0-dev.3664+0f5aff344/zig'
+alias obsidian='$HOME/Software/obsidian/Obsidian-1.6.7.AppImage & disown'
 # ----------------------------------------------------------
 
 # Games   

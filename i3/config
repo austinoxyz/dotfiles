@@ -79,6 +79,7 @@ bindsym $mod+Return exec $TERM
 # kill focused window
 # 0x5d = key ']' ($mod+Shift+])
 bindsym $mod+Shift+0x5d kill
+bindsym $mod+Shift+Control+z kill
 
 # change focus
 bindsym $mod+$left  focus left
@@ -169,16 +170,18 @@ bindsym $mod+d       exec --no-startup-id dmenu_run -i -m 2 -p "launch:" -fn "io
 bindsym $mod+space   exec --no-startup-id quicklaunch.sh
 bindsym $mod+s       exec --no-startup-id launch-search.sh
 bindsym $mod+x       exec --no-startup-id launch-cmd.sh
+bindsym $mod+Prior   exec --no-startup-id "random-wallpaper.sh notify"
+bindsym $mod+Shift+e exec --no-startup-id pcmanfm
 bindsym $mod+Shift+f exec --no-startup-id firefox
 bindsym $mod+Shift+p exec --no-startup-id keepassxc
 bindsym $mod+Shift+g exec --no-startup-id gimp
 bindsym $mod+Shift+v exec --no-startup-id virt-manager
 bindsym $mod+Shift+s exec --no-startup-id steam
-bindsym $mod+Shift+d exec --no-startup-id discord
-bindsym $mod+Shift+m exec --no-startup-id firefox -new-window "https://gmail.com"              
+bindsym $mod+Shift+t exec --no-startup-id neovide
+bindsym $mod+Shift+m exec --no-startup-id thunderbird
+bindsym $mod+Shift+d exec --no-startup-id ~/Software/Discord/Discord
+bindsym $mod+Shift+n exec --no-startup-id ~/Software/obsidian/Obsidian-1.6.7.AppImage
 bindsym $mod+Shift+c exec --no-startup-id $TERM -e 'chatgpt'
-bindsym $mod+Shift+n exec --no-startup-id $TERM -e 'nvim'
-bindsym $mod+Prior   exec --no-startup-id "random-wallpaper.sh notify"
 # ----------------------------------------------------------
 
 # Bookmarks

@@ -116,7 +116,7 @@ keymap("n", "<m-]>", "<c-]>", opts)
 keymap("n", "<m-[>", "<c-t>", opts)
 -----------------------------------------------------------
 
--- "Applications"
+-- "applications"
 -----------------------------------------------------------
 keymap("n", "<leader>h", ":FZF<cr>", opts)
 keymap("n", "<leader>f", ":Files<cr>", opts)
