@@ -48,7 +48,8 @@ return packer.startup(function(use)
     use "Mofiqul/dracula.nvim"             -- colorscheme
     use 'nvim-lualine/lualine.nvim'        -- statusbar
     use "nvim-tree/nvim-web-devicons"      -- icons
-    use "nvim-tree/nvim-tree.lua"          -- directory navigator
+    use "nvim-tree/nvim-tree.lua"          -- file manager
+    use "prichrd/netrw.nvim"               -- better netrw (directory navigator)
     use "puremourning/vimspector"          -- debugger
     use "junegunn/fzf"                     -- fuzzy finder
     use "junegunn/fzf.vim"                 -- fuzzy finder

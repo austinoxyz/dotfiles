@@ -177,7 +177,7 @@ bindsym $mod+Shift+p exec --no-startup-id keepassxc
 bindsym $mod+Shift+g exec --no-startup-id gimp
 bindsym $mod+Shift+v exec --no-startup-id virt-manager
 bindsym $mod+Shift+s exec --no-startup-id steam
-bindsym $mod+Shift+t exec --no-startup-id neovide
+bindsym $mod+Shift+t exec --no-startup-id neovide -- --cmd "e /home/anon"
 bindsym $mod+Shift+m exec --no-startup-id thunderbird
 bindsym $mod+Shift+d exec --no-startup-id ~/Software/Discord/Discord
 bindsym $mod+Shift+n exec --no-startup-id ~/Software/obsidian/Obsidian-1.6.7.AppImage

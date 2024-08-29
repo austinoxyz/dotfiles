@@ -13,5 +13,10 @@ require "austino.config.nvim-tree"
 require "austino.config.fzf"
 require "austino.config.coc"
 require "austino.config.treesitter"
+require "austino.config.netrw"
 
 require "austino.functions.c-split"
+
+if vim.g.neovide then
+    require "austino.config.neovide"
+end
