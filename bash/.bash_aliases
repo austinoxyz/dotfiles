@@ -11,7 +11,7 @@ alias ..='cd ..'
 alias vim='nvim'
 
 if [ ! -z "${UTILITY}" ] && [ -d "${UTILITY}" ]; then
-    alias fx="${UTILITY}/setup-peripherals.sh"
+    alias fx="${UTILITY}/config-keyboard.sh"
     alias rw="${UTILITY}/random-wallpaper.sh"
     alias setmon="${UTILITY}/setup-monitors.sh"
     alias redon="${UTILITY}/redshift.sh"
@@ -133,7 +133,7 @@ alias vpn='sudo openvpn --config ~/.vpn/atlanta.ovpn'
 alias tor='cd $HOME/Software/tor-browser;./Browser/start-tor-browser.desktop'
 alias nv='PATH=$PATH:$HOME/.config/nvim/lua/austino nvim'
 alias btc='$HOME/Software/Electrum-4.3.3/run_electrum & disown'
-alias zig='$HOME/Software/zig-linux-x86_64-0.11.0-dev.3664+0f5aff344/zig'
+alias zig='$HOME/Software/zig/zig-linux-x86_64-0.14.0-dev.1472+3929cac15/zig'
 alias obsidian='$HOME/Software/obsidian/Obsidian-1.6.7.AppImage & disown'
 # ----------------------------------------------------------
 
