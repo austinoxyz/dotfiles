@@ -58,7 +58,7 @@ yellow = "0xfabd2f"
 
 [colors.primary]
 # dracula background compatible with nvim
-background = "0x323445"
+background = "0x282A36"
 # gruvbox background compatible with nvim
 # background = "0x323232"
 foreground = "0xd5c4a1"
