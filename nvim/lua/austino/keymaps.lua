@@ -146,8 +146,8 @@ keymap("n", "<m-f>", ":call vimspector#DownFrame()<cr>", opts)
 local keyset = vim.keymap.set
 local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 -- completion with Tab and Shift+Tab
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', coc_opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], coc_opts)
+-- keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', coc_opts)
+-- keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], coc_opts)
 -----------------------------------------------------------
 
 -- Convenience keybinds for certain files, 

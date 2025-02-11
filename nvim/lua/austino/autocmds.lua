@@ -8,7 +8,22 @@ augroup('color_column', { clear = true })
 
 autocmd('FileType', {
     pattern = { '*.cpp', '*.hpp' },
-    command = 'setlocal colorcolumn=80 | SetTab 4 | ' })
+    command = 'setlocal colorcolumn=80 | SetTab 4 | ' 
+})
+
+autocmd('FileType', {
+    pattern = 'help',
+    command = 'wincmd L'
+})
+
+autocmd('FileType', {
+    pattern = 'help',
+    command = 'wincmd L'
+})
+
+vim.filetype.add({
+    pattern = { ["/home/austin/.config/hypr/*.conf"] = "hyprlang" }
+})
 
 --autocmd('FileType', {
 --    pattern = '*.qf',

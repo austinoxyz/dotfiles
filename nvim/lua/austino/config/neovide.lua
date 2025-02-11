@@ -7,7 +7,7 @@ local function alpha()
 end
 vim.g.neovide_transparency = 0.9
 vim.g.transparency = 0.9
-vim.g.neovide_background_color = "#1b1b1b"..alpha()
+vim.g.neovide_background_color = "#282a36"..alpha()
 vim.g.neovide_window_blurred = true
 
 --local function starts_with(str, prefix)
@@ -15,7 +15,7 @@ vim.g.neovide_window_blurred = true
 --end
 --osname = vim.loop.os_uname().sysname
 --if osname == "Linux" then
---    vim.api.nvim_create_autocmd('VimEnter', { pattern={'*'}, command='cd /home/anon/code' })
+--    vim.api.nvim_create_autocmd('VimEnter', { pattern={'*'}, command='cd /home/austin/code' })
 --elseif string.starts_with(osname, "Windows") then
 --    vim.api.nvim_create_autocmd('VimEnter', { pattern={'*'}, command='cd ~' })
 --end
