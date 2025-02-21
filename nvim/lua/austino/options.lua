@@ -21,6 +21,7 @@ local nvim_options = {
     timeoutlen      = 500,           -- ms until keystroke expires
     termguicolors	= true,          -- better colors
     updatetime  	= 300, 		     -- faster updates
+    scrolloff       = 16,            -- keep cursor more centered during scrolling
     guifont         = "iosevka:h10", -- iosevka best font
     syntax		    = "enable",      -- use syntax highlighting
     encoding	    = "utf-8",       -- file encoding
