@@ -1,7 +1,5 @@
 # austinoxyz/.bash_aliases
 
-# Convenience
-# ----------------------------------------------------------
 alias la='ls -lAh --time-style=iso'
 alias ll='ls -lh'
 
@@ -9,6 +7,8 @@ alias +x='chmod u+x'
 alias :q='exit'
 alias ..='cd ..'
 alias vim='nvim'
+alias nv='PATH=$PATH:$HOME/.config/nvim/lua/austino nvim'
+alias ssha="eval "$(ssh-agent -s)""
 
 if [ ! -z "${UTILITY}" ] && [ -d "${UTILITY}" ]; then
     alias fx="${UTILITY}/config-keyboard.sh"
@@ -28,10 +28,14 @@ alias mc="clear && make clean && make -j8"
 
 # list process information from pids
 alias lsps="ps -o pid,ppid,cmd,%cpu,%mem,etime -p"
-
 # ----------------------------------------------------------
 
-# Utility functions
+# Git
+# ----------------------------------------------------------
+alias gen-deploy-key="ssh-keygen -t ed25519 -C 'aodonnell2536.3@gmail.com'"
+alias diff-last-commit='git diff >diff.diff && nv diff.diff'
+alias gap='git add -p'
+alias gg='git grep -n'
 # ----------------------------------------------------------
 
 # Usage: mksh [filename]
@@ -112,47 +116,8 @@ opensplit() {
 alias osp="opensplit "
 # ----------------------------------------------------------
 
-# SSH
-# ----------------------------------------------------------
-alias ssha="eval "$(ssh-agent -s)""
-# ----------------------------------------------------------
-
-# Git
-# ----------------------------------------------------------
-alias gen-deploy-key="ssh-keygen -t ed25519 -C 'aodonnell2536.3@gmail.com'"
-alias diff-last-commit='git diff >diff.diff && nv diff.diff'
-alias gap='git add -p'
-alias gg='git grep -n'
-# ----------------------------------------------------------
-
 # Pacman
 # ----------------------------------------------------------
-alias pacman-list-packages="pacman -Qqe"
-alias pacman-clear-orphans="sudo pacman -Rns \$(sudo pacman -Qdts)"
+# alias pacman-list-packages="pacman -Qqe"
+# alias pacman-clear-orphans="sudo pacman -Rns \$(sudo pacman -Qdts)"
 # ----------------------------------------------------------
-
-# Software
-# ----------------------------------------------------------
-alias xmrig='~/Applications/xmrig/xmrig -o us-west.minexmr.com:4444 -u 41ifEWnkJtRFfWuvpzX4s7VvgZPbgeGxEdX2KffiDZs74VtT4VRin765uPfEQpx9xuTCwzzZWWJ2f8Q6icedQinGQWQrws8 -k --coin monero --cpu-memory-pool=4 --log-file="~/logs/xmrig/xmrig.log"'
-alias vpn='sudo openvpn --config ~/.vpn/atlanta.ovpn'
-alias tor='cd $HOME/Software/tor-browser;./Browser/start-tor-browser.desktop'
-alias nv='PATH=$PATH:$HOME/.config/nvim/lua/austino nvim'
-alias btc='$HOME/Software/Electrum-4.3.3/run_electrum & disown'
-alias obsidian='$HOME/Software/obsidian/Obsidian-1.6.7.AppImage & disown'
-# ----------------------------------------------------------
-
-# Games   
-# ----------------------------------------------------------
-alias doom='${HOME}/Games/gzdoom/build/gzdoom'
-alias quake="quakespasm -basedir ${HOME}/Games/Quake/"
-alias zork="cd ${HOME}/Games/Zork1 && dosbox ${HOME}/Games/Zork1/zork1.bat -exit"
-# ----------------------------------------------------------
-
-# MacOS :^)
-# ----------------------------------------------------------
-# clean up stupid '._*' files that MacOS leaves around
-alias dot_clean="find . -type f -name '._*' -delete"
-# clean up swap files that MacOS leaves in the working directory (for some reason)
-alias swp_clean="find . -type f -name '.*.swp' -delete"
-# ----------------------------------------------------------
-

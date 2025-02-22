@@ -13,17 +13,14 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-
-# ============================================================================
-# History
+[ -f "$HOME/.config/.env" ]  && source "$HOME/.config/.env"
+[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
+[ -f "$HOME/.cargo/env" ]    && source "$HOME/.cargo/env"
 
 HISTCONTROL=ignoreboth # no duplicate lines or lines starting with spaces
 shopt -s histappend    # append to the history file, don't overwrite it
 HISTSIZE=1000
 HISTFILESIZE=2000
-
-# ============================================================================
-# Colors
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -57,53 +54,15 @@ fi
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+# check and update window buffer size if needed after each command
+shopt -s checkwinsize
+
 # allow all new terminals to be colored by wal
 # cat ~/.cache/wal/sequences
-
-# ============================================================================
-# Load Environment Variables
-#
-export TEST_VAR="this is a test"
-[ -f "$HOME/.config/.env" ]  && source "$HOME/.config/.env"
-[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
-[ -f "$HOME/.cargo/env" ]    && source "$HOME/.cargo/env"
-
-# ============================================================================
-# Miscellaneous
 
 # vi mode 
 # doesn't work in alacritty?
 # set -o vi
 
-# check and update window buffer size if needed after each command
-shopt -s checkwinsize
-
-# ============================================================================
-# Autostart X
-#if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-#    exec startx
-#fi
-
-# ANSI color codes
-# ============================================================================
-#RSET="\[\033[0m\]"  # reset
-#HCLR="\[\033[1m\]"  # hicolor
-#ULIN="\[\033[4m\]"  # underline
-#INVR="\[\033[7m\]"  # inverse background and foreground
-#FBLK="\[\033[30m\]" # foreground black
-#FRED="\[\033[31m\]" # foreground red
-#FGRN="\[\033[32m\]" # foreground green
-#FYEL="\[\033[33m\]" # foreground yellow
-#FBLE="\[\033[34m\]" # foreground blue
-#FMAG="\[\033[35m\]" # foreground magenta
-#FCYN="\[\033[36m\]" # foreground cyan
-#FWHT="\[\033[37m\]" # foreground white
-#BBLK="\[\033[40m\]" # background black
-#BRED="\[\033[41m\]" # background red
-#BGRN="\[\033[42m\]" # background green
-#BYEL="\[\033[43m\]" # background yellow
-#BBLE="\[\033[44m\]" # background blue
-#BMAG="\[\033[45m\]" # background magenta
-#BCYN="\[\033[46m\]" # background cyan
-#BWHT="\[\033[47m\]" # background white
 . "$HOME/.cargo/env"
+
