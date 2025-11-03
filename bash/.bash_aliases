@@ -8,6 +8,7 @@ alias :q='exit'
 alias ..='cd ..'
 alias vim='nvim'
 alias nv='PATH=$PATH:$HOME/.config/nvim/lua/austino nvim'
+alias top='bashtop'
 alias ssha="eval "$(ssh-agent -s)""
 
 if [ ! -z "${UTILITY}" ] && [ -d "${UTILITY}" ]; then
@@ -36,6 +37,11 @@ alias gen-deploy-key="ssh-keygen -t ed25519 -C 'aodonnell2536.3@gmail.com'"
 alias diff-last-commit='git diff >diff.diff && nv diff.diff'
 alias gap='git add -p'
 alias gg='git grep -n'
+# ----------------------------------------------------------
+
+# Zigup
+# ----------------------------------------------------------
+alias zigup="zigup --install-dir /home/austin/.local/share/bin "
 # ----------------------------------------------------------
 
 # Usage: mksh [filename]
@@ -120,4 +126,12 @@ alias osp="opensplit "
 # ----------------------------------------------------------
 # alias pacman-list-packages="pacman -Qqe"
 # alias pacman-clear-orphans="sudo pacman -Rns \$(sudo pacman -Qdts)"
+# ----------------------------------------------------------
+
+# Balatro
+# ----------------------------------------------------------
+alias cd-balatro-mods="cd ~/.local/share/Steam/steamapps/compatdata/2379780/pfx/drive_c/users/steamuser/AppData/Roaming/Balatro/Mods"
+#alias cd-ror2-mods="cd ~/.local/share/Steam/steamapps/common/Risk\ of\ Rain\ 2"
+alias cd-straftat-mods="cd ~/.local/share/Steam/steamapps/common/STRAFTAT/BepInEx/plugins"
+alias launch-balatro="cd ~/.steam/steam/steamapps/common/Balatro; PROTON_LOG=1 PROTON_DEBUG=1 PROTON_NO_ESYNC=1 PROTON_NO_FSYNC=1 STEAM_COMPAT_CLIENT_INSTALL_PATH=/home/austin/.steam STEAM_COMPAT_DATA_PATH=~/.steam/steam/steamapps/compatdata/2379780 WINEDLLOVERRIDES=\"version=n,b\" ~/.steam/steam/steamapps/common/Proton\ -\ Experimental/proton run ~/.steam/steam/steamapps/common/Balatro/Balatro.exe"
 # ----------------------------------------------------------

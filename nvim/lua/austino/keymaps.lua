@@ -4,11 +4,9 @@
 -- Globals
 -----------------------------------------------------------
 local opts = { noremap = true, silent = true }
-local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 local noremap_only = { noremap = true }
 
 local keymap = vim.api.nvim_set_keymap
-local keyset = vim.keymap.set
 
 -- leader key
 keymap("", "<Space>", "<Nop>", opts)
@@ -93,6 +91,11 @@ keymap("n", "<Up>",    "<c-w>k", opts)
 keymap("n", "<Down>",  "<c-w>j", opts)
 -----------------------------------------------------------
 
+-- diagnostics
+-----------------------------------------------------------
+keymap("n", "L", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+-----------------------------------------------------------
+
 -- Project Management/Navigation
 -----------------------------------------------------------
 -- For C/C++ projects, open a header/source file in a tabnew vsplit, 
@@ -122,44 +125,48 @@ keymap("n", "<leader>h", ":FZF<cr>", opts)
 keymap("n", "<leader>f", ":Files<cr>", opts)
 keymap("n", "<leader>t", ":Tags<cr>", opts)
 keymap("n", "<leader>r", ":Rg<cr>", opts)
-keymap("n", "<leader>n", ":NvimTreeOpen<cr>", opts)
+keymap("n", "<leader>n", ":NvimTreeToggle<cr>", opts)
 -----------------------------------------------------------
 
 -- vimspector
 -----------------------------------------------------------
---keymap("n", "<m-p>", ":call vimspector#Pause()<cr>", opts)
-keymap("n", "<m-q>", ":call vimspector#Reset()<cr>", opts)
-keymap("n", "<m-w>", ":call vimspector#Launch()<cr>", opts)
-keymap("n", "<m-e>", ":call vimspector#Stop()<cr>", opts)
-keymap("n", "<m-c>", ":call vimspector#Continue()<cr>", opts)
-keymap("n", "<m-x>", ":call vimspector#ToggleBreakpoint()<cr>", opts)
-keymap("n", "<m-v>", ":call vimspector#ToggleConditionalBreakpoint()<cr>", opts)
-keymap("n", "<m-z>", ":call vimspector#ClearBreakpoints()<cr>", opts)
-keymap("n", "<m-a>", ":call vimspector#StepOver()<cr>", opts)
-keymap("n", "<m-s>", ":call vimspector#StepInto()<cr>", opts)
-keymap("n", "<m-d>", ":call vimspector#StepOut()<cr>", opts)
-keymap("n", "<m-r>", ":call vimspector#UpFrame()<cr>", opts)
-keymap("n", "<m-f>", ":call vimspector#DownFrame()<cr>", opts)
+-- keymap("n", "<m-p>", ":call vimspector#Pause()<cr>", opts)
+-- keymap("n", "<m-q>", ":call vimspector#Reset()<cr>", opts)
+-- keymap("n", "<m-w>", ":call vimspector#Launch()<cr>", opts)
+-- keymap("n", "<m-e>", ":call vimspector#Stop()<cr>", opts)
+-- keymap("n", "<m-c>", ":call vimspector#Continue()<cr>", opts)
+-- keymap("n", "<m-x>", ":call vimspector#ToggleBreakpoint()<cr>", opts)
+-- keymap("n", "<m-v>", ":call vimspector#ToggleConditionalBreakpoint()<cr>", opts)
+-- keymap("n", "<m-z>", ":call vimspector#ClearBreakpoints()<cr>", opts)
+-- keymap("n", "<m-a>", ":call vimspector#StepOver()<cr>", opts)
+-- keymap("n", "<m-s>", ":call vimspector#StepInto()<cr>", opts)
+-- keymap("n", "<m-d>", ":call vimspector#StepOut()<cr>", opts)
+-- keymap("n", "<m-r>", ":call vimspector#UpFrame()<cr>", opts)
+-- keymap("n", "<m-f>", ":call vimspector#DownFrame()<cr>", opts)
 
 -- coc.nvim
 -----------------------------------------------------------
-local keyset = vim.keymap.set
-local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
+-- local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 -- completion with Tab and Shift+Tab
 -- keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', coc_opts)
 -- keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], coc_opts)
 -----------------------------------------------------------
 
--- Convenience keybinds for certain files, 
--- either global or an instance in the cwd
+-- harpoon2.nvim
 -----------------------------------------------------------
-local set_file_open_keybind = function(leader_for_keybind, filename)
-    keymap("n","<leader>"..leader_for_keybind.."e",":tabnew "..filename.."<cr>",opts)
-end
+-- local harpoon = require("harpoon")
 
-set_file_open_keybind("`", "./Makefile")
-set_file_open_keybind("1", "./README.md")
-set_file_open_keybind("v", "./.vimspector.json")
+-- keyset("n", "<leader>a", function() harpoon:list():add() end)
+-- keyset("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+-- keyset("n", "<C-h>", function() harpoon:list():select(1) end)
+-- keyset("n", "<C-t>", function() harpoon:list():select(2) end)
+-- keyset("n", "<C-n>", function() harpoon:list():select(3) end)
+-- keyset("n", "<C-s>", function() harpoon:list():select(4) end)
+
+-- -- Toggle previous & next buffers stored within Harpoon list
+-- keyset("n", "<C-S-P>", function() harpoon:list():prev() end)
+-- keyset("n", "<C-S-N>", function() harpoon:list():next() end)
 -----------------------------------------------------------
 
 -- NOTES

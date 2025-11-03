@@ -32,8 +32,7 @@ force_color_prompt=yes
 color_prompt=yes
 
 if [ "$color_prompt" = yes ]; then
-#    OLD_PS1='\[\033[31m\][\[\033[32m\]${debian_chroot:+($debian_chroot)}\u\[\033[33m\]\[\033[36m\]@\[\033[34m\]\h \[\033[35m\]\w\[\033[31m\]]\[\033[33m\]\$ \[\033[37m\]'; PROMPT_DIRTRIM=1
-    PS1='[\[\033[37m\]\t] \[\033[31m\]\W \[\033[33m\]\\$ \[\033[0m\]'
+    PS1='\[\033[37m\][\[\033[37m\]\t] \[\033[31m\]\W \[\033[33m\]\\$ \[\033[0m\]'
     PS2='\[\033[33m\] > \[\033[0m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -61,8 +60,10 @@ shopt -s checkwinsize
 # cat ~/.cache/wal/sequences
 
 # vi mode 
-# doesn't work in alacritty?
 # set -o vi
+# bind 'set show-mode-in-prompt on'
+# bind 'set vi-ins-mode-string "\1\e[6 q\2"'  # beam cursor
+# bind 'set vi-cmd-mode-string "\1\e[2 q\2"'  # block cursor
 
 . "$HOME/.cargo/env"
 
