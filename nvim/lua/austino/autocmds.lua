@@ -7,18 +7,18 @@ augroup('vim_commentary', { clear = true })
 augroup('color_column', { clear = true })
 
 autocmd('FileType', {
-  pattern = { '*.cpp', '*.hpp' },
-  command = 'setlocal colorcolumn=80 | SetTab 4 | ' 
+  pattern = { 'cpp', 'hpp' },
+  command = 'setlocal colorcolumn=80 | SetTab 4 | '
 })
 
 autocmd('FileType', {
   pattern = 'help',
-  command = 'wincmd L'
+  command = 'wincmd J'
 })
 
 autocmd('FileType', {
   pattern = { '*.c', '*.h' },
-  command = 'set path+=./include,./src,' 
+  command = 'set path+=./include,./src,'
 })
 
 autocmd("FileType", {
@@ -30,7 +30,7 @@ autocmd("FileType", {
     vim.opt_local.softtabstop = 2
     vim.opt_local.expandtab = true
     -- for some reason treesitter wants to add a single
-    -- space to the beginning of every new line :)
+    -- space to the beginning of every new line :^)
     vim.cmd("TSDisable indent")
   end,
 })

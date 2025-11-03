@@ -41,81 +41,31 @@ packer.init {
 }
 
 -- plugins
-return packer.startup(
+local result = packer.startup(
   function(use)
     use 'wbthomason/packer.nvim'           -- packer manages itself
     use 'morhetz/gruvbox'                  -- colorscheme
     use 'Mofiqul/dracula.nvim'             -- colorscheme
+    use 'tribela/transparent.nvim'         -- transparency
     use 'nvim-lualine/lualine.nvim'        -- statusbar
-    use 'prichrd/netrw.nvim'               -- better netrw (directory navigator)
-    use 'junegunn/fzf'                     -- fuzzy finder
-    use 'junegunn/fzf.vim'                 -- fuzzy finder
+    -- use 'junegunn/fzf'                     -- fuzzy finder
+    -- use 'junegunn/fzf.vim'                 -- fuzzy finder
     use 'norcalli/nvim-colorizer.lua'      -- highlight color codes
     use 'tpope/vim-surround'               -- motions for manipulating symbols that surround text
     use 'tpope/vim-commentary'             -- motions for commenting out lines
-    use { 'mg979/vim-visual-multi', branch='master' }          -- multiple cursors
+    use 'nvim-mini/mini.pick'              -- file picker / fuzzy finder
+    use "neovim/nvim-lspconfig"            -- a bunch of lsp configurations
+    use 'stevearc/oil.nvim'                -- modify directory contents in buffer
+
     use { 'nvim-treesitter/nvim-treesitter', run=':TSUpdate' } -- treesitter highlighting
-
-    use { "lervag/vimtex", lazy=false }
-
-    use {
-      'nvim-tree/nvim-tree.lua',
-      requires = {
-        'nvim-tree/nvim-web-devicons',
-      },
-    }
-
-    use 'tribela/transparent.nvim'
-
-    -- lsp + lua setup
-    -- use { "neovim/nvim-lspconfig",
-    --   config = function()
-    --     require("lspconfig").lua_ls.setup({
-    --       settings = {
-    --         Lua = {
-    --           diagnostics = {
-    --             globals = { "vim" },
-    --           },
-    --           workspace = {
-    --             library = vim.api.nvim_get_runtime_file("", true),
-    --             checkThirdParty = false,
-    --           },
-    --         },
-    --       },
-    --     })
-    --   end
-    -- }
-
-    use "neovim/nvim-lspconfig"
-
-    -- -- nvim completion
-    -- use { "hrsh7th/nvim-cmp",
-    --   requires = {
-    --     "hrsh7th/cmp-nvim-lsp",
-    --     "L3MON4D3/LuaSnip"
-    --   },
-    --   config = function()
-    --     local cmp = require("cmp")
-    --     cmp.setup({
-    --       snippet = {
-    --         expand = function(args)
-    --           require("luasnip").lsp_expand(args.body)
-    --         end,
-    --       },
-    --       sources = {
-    --         { name = "nvim_lsp" },
-    --       },
-    --       mapping = cmp.mapping.preset.insert({
-    --         ["<Tab>"] = cmp.mapping.select_next_item(),
-    --         ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-    --         ["<CR>"] = cmp.mapping.confirm({ select = true }),
-    --       }),
-    --     })
-    --   end
-    -- }
 
     -- bootstrap
     if PACKER_BOOTSTRAP then
       require("packer").sync()
     end
 end)
+
+require 'mini.pick'.setup()
+require 'oil'.setup()
+
+return result

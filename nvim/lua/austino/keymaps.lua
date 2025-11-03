@@ -96,6 +96,16 @@ keymap("n", "<Down>",  "<c-w>j", opts)
 keymap("n", "L", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 -----------------------------------------------------------
 
+-- Navigation
+-----------------------------------------------------------
+keymap("n", "<leader>f", ":Pick files<cr>", opts)
+keymap("n", "<leader>r", ":Pick grep_live<cr>", opts)
+
+-- navigate ctags
+keymap("n", "<m-]>", "<c-]>", opts)
+keymap("n", "<m-[>", "<c-t>", opts)
+-----------------------------------------------------------
+
 -- Project Management/Navigation
 -----------------------------------------------------------
 -- For C/C++ projects, open a header/source file in a tabnew vsplit, 
@@ -113,70 +123,4 @@ keymap("n", "<m-;>", ":OpenCSplit ", noremap_only)
 
 -- make clean all
 keymap("n", "<m-\\>", ":make clean all<cr>", noremap_only)
-
--- navigate ctags
-keymap("n", "<m-]>", "<c-]>", opts)
-keymap("n", "<m-[>", "<c-t>", opts)
 -----------------------------------------------------------
-
--- "applications"
------------------------------------------------------------
-keymap("n", "<leader>h", ":FZF<cr>", opts)
-keymap("n", "<leader>f", ":Files<cr>", opts)
-keymap("n", "<leader>t", ":Tags<cr>", opts)
-keymap("n", "<leader>r", ":Rg<cr>", opts)
-keymap("n", "<leader>n", ":NvimTreeToggle<cr>", opts)
------------------------------------------------------------
-
--- vimspector
------------------------------------------------------------
--- keymap("n", "<m-p>", ":call vimspector#Pause()<cr>", opts)
--- keymap("n", "<m-q>", ":call vimspector#Reset()<cr>", opts)
--- keymap("n", "<m-w>", ":call vimspector#Launch()<cr>", opts)
--- keymap("n", "<m-e>", ":call vimspector#Stop()<cr>", opts)
--- keymap("n", "<m-c>", ":call vimspector#Continue()<cr>", opts)
--- keymap("n", "<m-x>", ":call vimspector#ToggleBreakpoint()<cr>", opts)
--- keymap("n", "<m-v>", ":call vimspector#ToggleConditionalBreakpoint()<cr>", opts)
--- keymap("n", "<m-z>", ":call vimspector#ClearBreakpoints()<cr>", opts)
--- keymap("n", "<m-a>", ":call vimspector#StepOver()<cr>", opts)
--- keymap("n", "<m-s>", ":call vimspector#StepInto()<cr>", opts)
--- keymap("n", "<m-d>", ":call vimspector#StepOut()<cr>", opts)
--- keymap("n", "<m-r>", ":call vimspector#UpFrame()<cr>", opts)
--- keymap("n", "<m-f>", ":call vimspector#DownFrame()<cr>", opts)
-
--- coc.nvim
------------------------------------------------------------
--- local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
--- completion with Tab and Shift+Tab
--- keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', coc_opts)
--- keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], coc_opts)
------------------------------------------------------------
-
--- harpoon2.nvim
------------------------------------------------------------
--- local harpoon = require("harpoon")
-
--- keyset("n", "<leader>a", function() harpoon:list():add() end)
--- keyset("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
--- keyset("n", "<C-h>", function() harpoon:list():select(1) end)
--- keyset("n", "<C-t>", function() harpoon:list():select(2) end)
--- keyset("n", "<C-n>", function() harpoon:list():select(3) end)
--- keyset("n", "<C-s>", function() harpoon:list():select(4) end)
-
--- -- Toggle previous & next buffers stored within Harpoon list
--- keyset("n", "<C-S-P>", function() harpoon:list():prev() end)
--- keyset("n", "<C-S-N>", function() harpoon:list():next() end)
------------------------------------------------------------
-
--- NOTES
------------------------------------------------------------
--- Modes
-  -- normal_mode = "n",
-  -- insert_mode = "i",
-  -- visual_mode = "v",
-  -- visual_block_mode = "x",
-  -- term_mode = "t",
-  -- command_mode = "c",
------------------------------------------------------------
-
