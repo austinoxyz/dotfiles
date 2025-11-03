@@ -49,16 +49,16 @@ autocmd('FileType', {
 -------------------------
 
 -- make -----------------
-vim.lsp.config['make'] = {
-  cmd = { 'make-lsp' },
-  filetypes = { 'make' },
-  root_dir = vim.fs.root(0, { 'Makefile', '.git' }),
-}
+-- vim.lsp.config['make'] = {
+--   cmd = { 'make-lsp' },
+--   filetypes = { 'make' },
+--   root_dir = vim.fs.root(0, { 'Makefile', '.git' }),
+-- }
 
-autocmd('FileType', {
-  pattern = { 'make' },
-  callback = function()
-    vim.lsp.start(vim.lsp.config['make'])
-  end
-})
+-- autocmd('FileType', {
+--   pattern = { 'make' },
+--   callback = function()
+--     vim.lsp.start(vim.lsp.config['make'])
+--   end
+-- })
 -------------------------
