@@ -35,7 +35,7 @@ autocmd('FileType', {
 
 -- clangd ---------------
 vim.lsp.config['clangd'] = {
-  cmd = { "clangd" },
+  cmd = { "clangd", "--background-index", "--query-driver=/usr/bin/g++,/usr/bin/gcc" },
   filetypes = { "c", "cpp", "h", "hpp" },
   root_dir = vim.fs.root(0, {'compile_commands.json', '.git', 'main.c', 'main.cpp'}),
 }

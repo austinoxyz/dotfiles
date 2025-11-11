@@ -98,8 +98,8 @@ keymap("n", "L", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 
 -- Navigation
 -----------------------------------------------------------
-keymap("n", "<leader>f", ":Pick files<cr>", opts)
-keymap("n", "<leader>r", ":Pick grep_live<cr>", opts)
+keymap("n", "<leader>f", ":Pick files tool='git'<CR>", opts)
+keymap("n", "<leader>r", ":Pick grep_live<CR>", opts)
 
 -- navigate ctags
 keymap("n", "<m-]>", "<c-]>", opts)

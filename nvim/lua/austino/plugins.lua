@@ -65,7 +65,14 @@ local result = packer.startup(
     end
 end)
 
-require 'mini.pick'.setup()
+require 'mini.pick'.setup({
+  source = {
+    file = function()
+      return vim.fn.systemlist('fd --type f --hidden --exclude .git')
+    end,
+  }
+})
+
 require 'oil'.setup()
 
 return result

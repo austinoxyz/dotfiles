@@ -7,11 +7,6 @@ augroup('vim_commentary', { clear = true })
 augroup('color_column', { clear = true })
 
 autocmd('FileType', {
-  pattern = { 'cpp', 'hpp' },
-  command = 'setlocal colorcolumn=80 | SetTab 4 | '
-})
-
-autocmd('FileType', {
   pattern = 'help',
   command = 'wincmd J'
 })
