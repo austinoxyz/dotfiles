@@ -43,19 +43,20 @@ packer.init {
 -- plugins
 local result = packer.startup(
   function(use)
-    use 'wbthomason/packer.nvim'           -- packer manages itself
-    use 'morhetz/gruvbox'                  -- colorscheme
-    use 'Mofiqul/dracula.nvim'             -- colorscheme
-    use 'tribela/transparent.nvim'         -- transparency
-    use 'nvim-lualine/lualine.nvim'        -- statusbar
-    -- use 'junegunn/fzf'                     -- fuzzy finder
-    -- use 'junegunn/fzf.vim'                 -- fuzzy finder
-    use 'norcalli/nvim-colorizer.lua'      -- highlight color codes
-    use 'tpope/vim-surround'               -- motions for manipulating symbols that surround text
-    use 'tpope/vim-commentary'             -- motions for commenting out lines
-    use 'nvim-mini/mini.pick'              -- file picker / fuzzy finder
-    use "neovim/nvim-lspconfig"            -- a bunch of lsp configurations
-    use 'stevearc/oil.nvim'                -- modify directory contents in buffer
+    use 'wbthomason/packer.nvim'      -- packer manages itself
+    use 'nvim-lualine/lualine.nvim'   -- statusbar
+    use 'morhetz/gruvbox'             -- colorscheme
+    use 'Mofiqul/dracula.nvim'        -- colorscheme
+    use 'tribela/transparent.nvim'    -- transparency
+    use 'norcalli/nvim-colorizer.lua' -- highlight color codes
+    use 'tpope/vim-surround'          -- motions for manipulating symbols that surround text
+    use 'tpope/vim-commentary'        -- motions for commenting out lines
+    -- use 'junegunn/fzf'                -- fuzzy finder
+    -- use 'junegunn/fzf.vim'            -- fuzzy finder
+    use 'nvim-mini/mini.pick'         -- file picker / fuzzy finder
+    use 'nvim-mini/mini.completion'   -- small completion engine
+    use "neovim/nvim-lspconfig"       -- a bunch of lsp configurations
+    use 'stevearc/oil.nvim'           -- modify directory contents in buffer
 
     use { 'nvim-treesitter/nvim-treesitter', run=':TSUpdate' } -- treesitter highlighting
 
@@ -65,6 +66,7 @@ local result = packer.startup(
     end
 end)
 
+-- plugin setup
 require 'mini.pick'.setup({
   source = {
     file = function()
@@ -72,6 +74,8 @@ require 'mini.pick'.setup({
     end,
   }
 })
+
+require 'mini.completion'.setup()
 
 require 'oil'.setup()
 
