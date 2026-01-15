@@ -135,3 +135,8 @@ alias cd-balatro-mods="cd ~/.local/share/Steam/steamapps/compatdata/2379780/pfx/
 alias cd-straftat-mods="cd ~/.local/share/Steam/steamapps/common/STRAFTAT/BepInEx/plugins"
 alias launch-balatro="cd ~/.steam/steam/steamapps/common/Balatro; PROTON_LOG=1 PROTON_DEBUG=1 PROTON_NO_ESYNC=1 PROTON_NO_FSYNC=1 STEAM_COMPAT_CLIENT_INSTALL_PATH=/home/austin/.steam STEAM_COMPAT_DATA_PATH=~/.steam/steam/steamapps/compatdata/2379780 WINEDLLOVERRIDES=\"version=n,b\" ~/.steam/steam/steamapps/common/Proton\ -\ Experimental/proton run ~/.steam/steam/steamapps/common/Balatro/Balatro.exe"
 # ----------------------------------------------------------
+
+# Audio
+# ----------------------------------------------------------
+alias enable-airpods-input="wpctl set-profile 74 handsfree_head_unit"
+# ----------------------------------------------------------
